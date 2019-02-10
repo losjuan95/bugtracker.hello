@@ -1,0 +1,121 @@
+﻿@model IEnumerable<bugtracker.Models.ApplicationUser>
+@using bugtracker.Helpers
+
+
+@{
+    ViewBag.Title = "AssignRole";
+}
+<div class="container-fluid">
+    <div class="row">
+    <div class="col-md-3 bg-light">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <h2>AssignRole</h2>
+            <div class="form-group">
+
+                @Html.Label("Choose User", null, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Users", null, htmlAttributes: new { @class = "form-control" })
+
+                </div>
+            </div>
+
+            if (User.IsInRole("Admin"))
+            {
+                <div class="form-group">
+                    @Html.Label("Choose Role", null, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("Roles", null, htmlAttributes: new { @class = "form-control" })
+
+                    </div>
+                </div>
+            }
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Assign" class="btn btn-default" />
+                </div>
+            </div>
+
+        }
+    </div>
+    <div class="col-md-9 bg-transparent">
+
+
+        <hr>
+        <h2>Roles</h2>
+
+
+        <table class="table jq-data">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayName("Roles")
+                    </th>
+
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                        <td>
+                            @{
+                                var roleHelper = new UserRolesHelpers();
+                                var myRole = roleHelper.ListUserRoles(item.Id).FirstOrDefault();
+                            }
+
+                            @myRole
+                        </td>
+                        @if (User.IsInRole("PM") || User.IsInRole("Admin"))
+                        {
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "Users", new { id = item.Id }, null) 
+                                @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                            </td>
+                        }
+
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+    </div>
+</div>

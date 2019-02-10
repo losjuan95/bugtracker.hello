@@ -1,0 +1,40 @@
+﻿@model bugtracker.Models.IndexViewModel
+
+@{
+    ViewBag.Title = "Manage";
+   
+}
+@*profile custom css*@
+<link href="~/custom Css/profile.css" rel="stylesheet" />
+
+<div>
+    
+    <hr />
+    
+    <div class="card">
+     
+        <h1 class="Name">John Doe</h1>
+        <p class="Title">CEO & Founder, Example</p>
+        <p>role</p>
+        
+        <p><button>Account Settings</button></p>
+    </div>
+
+    <dl class="dl-horizontal">
+        <dt>Password:</dt>
+        <dd>
+            [
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Change your password", "ChangePassword")
+            }
+            else
+            {
+                @Html.ActionLink("Create", "SetPassword")
+            }
+            ]
+        </dd>
+
+
+    </dl>
+</div>

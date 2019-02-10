@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNet.Identity
+@using bugtracker.Helpers
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "ml-auto" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav ml-auto">
+        <li>
+            @Html.ActionLink( UserHelper.GetFirstName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })
+        </li>
+      
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav ml-auto">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })</li>
+    </ul>
+}
