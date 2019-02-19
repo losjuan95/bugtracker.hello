@@ -3,69 +3,130 @@
     Layout = null;
 }
 @model bugtracker.Models.LoginViewModel
-    
+@using bugtracker.Helpers
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="">
-    <title>SB Admin - Login</title>
-    <!-- Bootstrap core CSS-->
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom fonts for this template-->
-    <link href="~/Content/all.min.css" rel="stylesheet" type="text/css">
-    <!-- Custom styles for this template-->
-    <link href="~/Content/sb-admin.css" rel="stylesheet">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <title>Dashio - Bootstrap Admin Template</title>
+
+    <!-- Favicons -->
+
+    <link href="~/img/core icon.jpg" rel="icon" />
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!--external css-->
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="~/Content/style.css" rel="stylesheet" />
+
+    <link href="~/Content/style-responsive.css" rel="stylesheet" />
+
+    <!-- =======================================================
+      Template Name: Dashio
+      Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
+      Author: TemplateMag.com
+      License: https://templatemag.com/license/
+    ======================================================= -->
 </head>
-<body class="bg-dark">
-    <div class="container">
-        <div class="card card-login mx-auto mt-5">
-            <div class="card-header">Login</div>
-            <div class="card-body">
-                @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
 
-                                
-                    <div class="form-group">
-                        <div class="form-label-group">
-                            <input type="email" Name="Email" id="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
-                            <label for="inputEmail">Email address</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-label-group">
-                            <input type="password" Name="Password" id="inputPassword" class="form-control" placeholder="Password" required="required">
-                            <label for="inputPassword">Password</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="remember-me">
-                                Remember Password
-                            </label>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
-                }
-                    <div class="text-center">
+<body>
+    <!-- **********************************************************************************************************************************************************
+        MAIN CONTENT
+        *********************************************************************************************************************************************************** -->
+    <div id="login-page">
+        <div class="container">
 
-                        @Html.ActionLink("Register an Account", "CustomRegister", "Account", null)
+            @using (Html.BeginForm("Login", "Account", new { Returnurl = ViewBag.Returnurl }, FormMethod.Post, new { @class = "form-login", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h2 class="form-login-heading">sign in now</h2>
+                <div class="login-wrap">
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Email, new { placeholder = "Email", @class = "form-control" })
+
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        @Html.PasswordFor(m => m.Password, new { placeholder = "Password", @class = "form-control" })
+                    </div>
+
+                    <div class="col-md-2">
+                        <label class="checkbox">
+                            <input type="checkbox" value="remember-me"> Remember me
+
+                        </label>
+                    </div>
+                    <span class="pull-right">
+                        @*<a data-toggle="modal" href="login.html#myModal"> Forgot Password?</a>*@
+                        @Html.ActionLink("Forgot Password?", "CustomForgotPassword", "Account")
+
                         <br />
-                        @Html.ActionLink("Forgot Password?", "CustomForgotPassword", "Account", null)
+                        <span class="pull-right">
+                            @Html.ActionLink("Click to Go Back", "FirstPage", "Account")
+                        </span>
+
+                    </span>
+                    @*<a href=@Url.Action("Index","Home") class="btn btn-theme btn-block"  type="submit"><i class="fa fa-lock"></i> SIGN IN</a>*@
+
+                    <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
+                    <hr>
+                    @*<div class="login-social-link centered">
+                            <p>or you can sign in via your social network</p>
+                            <button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i> Facebook</button>
+                            <button class="btn btn-twitter" type="submit"><i class="fa fa-twitter"></i> Twitter</button>
+                        </div>*@
+                    <div class="registration">
+                        Don't have an account yet?<br />
+                        @Html.ActionLink("Register an Account", "CustomRegister", "Account", null)
                     </div>
+                </div>
+
+            }
+
+            <!-- Modal -->
+            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Forgot Password ?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Enter your e-mail address below to reset your password.</p>
+                            <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                            <button class="btn btn-theme" type="button">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal -->
+
         </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
-    <script src="~/Scripts/jquery.min.js"></script>
-    <script src="~/Scripts/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="~/Scripts/jquery.easing.min.js"></script>
-</body>
-</html>
+    <!-- js placed at the end of the document so the pages load faster -->
 
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!--BACKSTRETCH-->
+    <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+    <script type="text/javascript" src="~/Scripts/jquery.backstretch.min.js"></script>
+    <script>
+        $.backstretch(["img/avatarimg3.jpg"], {
+            speed: 500
+        });
+    </script>
+</body>
+
+</html>

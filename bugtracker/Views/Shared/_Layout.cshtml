@@ -1,41 +1,280 @@
-﻿<!DOCTYPE html>
-<html>
+﻿@using bugtracker.Helpers
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <!-- <meta name="description" content=""> -->
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <title>Dashio - Bootstrap Admin Template</title>
 
+    <!-- Favicons -->
+    <link href="~/img/core icon.jpg" rel="icon">
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <!--external css-->
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/zabuto_calendar.css" rel="stylesheet" />
+    <link href="~/Content/jquery.gritter.css" rel="stylesheet" />
+
+
+    <!-- Custom styles for this template -->
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/style-responsive.css" rel="stylesheet" />
+    <script src="~/Content/Chart.js"></script>
+    @*cdn for datatables*@
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css" />
+
+   
+    <!-- =======================================================
+      Template Name: Dashio
+      Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
+      Author: TemplateMag.com
+      License: https://templatemag.com/license/
+    ======================================================= -->
 </head>
-<body>
-    <div class="navbar navbar-dark bg-dark fixed-top navbar-expand-md">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-target=".navbar-collapse"
-                    data-toggle="collapse">
-                &#x2630;
-            </button>
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container" style="margin-top:30px">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+<body>
+    <section id="container">
+        <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+        <!--header start-->
+        <!--header start-->
+        <header class="header black-bg">
+            <div class="sidebar-toggle-box">
+                <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+            </div>
+           
+            @Html.ActionLink("BugTracker","Index","Home", new { @class="logo"})
+        
+            <!--logo end-->
+            <div class="nav notify-row" id="top_menu">
+                <!--  notification start -->
+                <ul class="nav top-menu">
+                    
+                    <!-- notification dropdown start-->
+                    <li id="header_notification_bar" class="dropdown">
+                        <a href="@Url.Action("Index", "TicketNotifications", new { @class="data-toggle dropdown-toggle fa fa-bell-o"})">
+                           <i class="fa fa-bell-o"></i>
+                            <span class="badge bg-warning"></span>
+                        </a>
+                        <ul class="dropdown-menu extended notification">                         
+                            <li>
+                                <p class="yellow"></p>
+                            </li>
+                            
+                            <li>
+                               
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- notification dropdown end -->
+                </ul>
+                <!--  notification end -->
+            </div>
+            <div class="top-menu">
+                <ul class="nav pull-right top-menu">
+                    <li>@Html.ActionLink("Log Out", "LogOff", "Account", null, new { @class = "btn btn-primary logout" })</li>
+                </ul>
+            </div>
+        </header>
+       
+
+        <!--header end-->
+        <!-- **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        *********************************************************************************************************************************************************** -->
+        <!--sidebar start-->
+        <aside>
+            <div id="sidebar" class="nav-collapse ">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu" id="nav-accordion">
+                    
+                    <h5 class="centered">@UserHelper.GetFirstName()</h5>
+                    <li>
+                      
+                        <a href="@Url.Action("Index","Manage")">
+                            <i class="fa-user-circle-o"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
+                    <li class="mt fa-user">
+                        @Html.ActionLink("DashBoard", "Index", "Home", new { @class="fa fa-dashboard active"})
+                        
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-desktop"></i>
+                            <span>Projects</span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("All Projects", "Index", "Projects")</li>
+                            <li><a href="buttons.html">My Projects</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-cogs"></i>
+                            <span>Tickets</span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("All Tickets", "Index", "Tickets")</li>
+
+                            <li><a href="calendar.html">My Tickets</a></li>
+                            <li><a href="gallery.html">High Priority Tickets</a></li>
+                            <li><a href="todo_list.html">Unassigned Tickets</a></li>
+                            <li>@Html.ActionLink("TicketAttachments", "Index", "TicketAttachments")</li>
+                            <li>@Html.ActionLink("TicketComments", "Index", "TicketComments")</li>
+                        </ul>
+                    </li>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="sub-menu">
+                            <a href="@Url.Action("MyIndex", "TicketNotifications")">
+                                <i class="fa fa-desktop"></i>
+                                <span>Ticket Notifications</span>
+                            </a>
+                        </li>
+                    }
+
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-desktop"></i>
+                            <span>Users</span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("All Users", "AssignRole", "Admin")</li>
+                            <li><a href="buttons.html">My Projects</a></li>
+
+                        </ul>
+                    </li>
+
+                    @*<li>
+            <a href="inbox.html">
+                <i class="fa fa-envelope"></i>
+                <span>Mail </span>
+                <span class="label label-theme pull-right mail-info">2</span>
+            </a>
+        </li>*@
+
+                </ul>
+                <!-- sidebar menu end-->
+            </div>
+        </aside>
+        <!--sidebar end-->
+
+        @RenderBody()
+
+        <!--footer start-->
+        <footer class="site-footer">
+            <div class="text-center">
+                <p>
+                    &copy; Copyrights <strong>BugTracker<strong>.All Rights Reserved
+                </p>
+
+                <a href="index.html#" class="go-top">
+                    <i class="fa fa-angle-up"></i>
+                </a>
+            </div>
+        </footer>
+        <!--footer end-->
+    </section>
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="~/Scripts/jquery.min.js"></script>
+
+    <script src="~/Scripts/vendor/bootstrap.min.js"></script>
+
+    <script src="~/Scripts/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="~/Scripts/jquery.scrollTo.min.js"></script>
+    <script src="~/Scripts/jquery.nicescroll.js"></script>
+    <script src="~/Scripts/jquery.sparkline.js"></script>
+    <!--common script for all pages-->
+    <script src="~/Scripts/common-scripts.js"></script>
+    <script src="~/Scripts/jquery.gritter.js"></script>
+    <script src="~/Scripts/gritter-conf.js"></script>
+    <!--script for this page-->
+    <script src="~/Scripts/sparkline-chart.js"></script>
+    <script src="~/Scripts/zabuto_calendar.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+    @RenderSection("scripts", false)
+
+
+    @*<script type="text/javascript">
+            $(document).ready(function() {
+              var unique_id = $.gritter.add({
+                // (string | mandatory) the heading of the notification
+                title: 'Welcome to Dashio!',
+                // (string | mandatory) the text inside the notification
+                text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo.',
+                // (string | optional) the image to display on the left
+                image: 'img/ui-sam.jpg',
+                // (bool | optional) if you want it to fade out on its own or just sit there
+                sticky: false,
+                // (int | optional) the time you want it to be alive for before fading out
+                time: 8000,
+                // (string | optional) the class name you want to apply to that specific message
+                class_name: 'my-sticky-class'
+              });
+
+              return false;
+            });
+        </script>*@
+        <script type="application/javascript">
+            $(document).ready(function() {
+              $("#date-popover").popover({
+                html: true,
+                trigger: "manual"
+              });
+              $("#date-popover").hide();
+              $("#date-popover").click(function(e) {
+                $(this).hide();
+              });
+
+              $("#my-calendar").zabuto_calendar({
+                action: function() {
+                  return myDateFunction(this.id, false);
+                },
+                action_nav: function() {
+                  return myNavFunction(this.id);
+                },
+                ajax: {
+                  url: "show_data.php?action=1",
+                  modal: true
+                },
+                legend: [{
+                    type: "text",
+                    label: "Special event",
+                    badge: "00"
+                  },
+                  {
+                    type: "block",
+                    label: "Regular event",
+                  }
+                ]
+              });
+            });
+
+            function myNavFunction(id) {
+              $("#date-popover").hide();
+              var nav = $("#" + id).data("navigation");
+              var to = $("#" + id).data("to");
+              console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+            }
+        </script>
 </body>
+
 </html>
+
+
+<script>
+    $(document).ready(function () {
+        $('.jq-data').DataTable();
+    });
+</script>

@@ -73,11 +73,82 @@ namespace bugtracker.Migrations
                     Email = "juancarloscorea95@gmail.com",
                     FirstName = "Juan Carlos",
                     LastName = "Corea"
-                    
+
 
                 }, "Hollirose95");
-               var userId = userManager.FindByEmail("juancarloscorea95@gmail.com").Id;
+                var userId = userManager.FindByEmail("juancarloscorea95@gmail.com").Id;
                 userManager.AddToRole(userId, "Admin");
+            }
+                //Setup demo Users here...
+            if (!context.Users.Any(u => u.Email == "DemoAdmin@Mailinator.com"))
+            {
+
+                userManager.Create(new ApplicationUser
+                {
+                    UserName = "DemoAdmin@Mailinator.com",
+                    Email = "DemoAdmin@Mailinator.com",
+                    FirstName = "Demo",
+                    LastName = "Admin"
+
+
+                }, "Abc&123!");
+                var userId = userManager.FindByEmail("DemoAdmin@Mailinator.com").Id;
+                userManager.AddToRole(userId, "Admin");
+
+
+            }
+
+            if (!context.Users.Any(u => u.Email == "DemoSub@Mailinator.com"))
+            {
+
+                userManager.Create(new ApplicationUser
+                {
+                    UserName = "DemoSub@Mailinator.com",
+                    Email = "DemoSub@Mailinator.com",
+                    FirstName = "Demo",
+                    LastName = "Sub"
+
+
+                }, "Abc&123!");
+                var userId = userManager.FindByEmail("DemoSub@Mailinator.com").Id;
+                userManager.AddToRole(userId, "Sub");
+
+            }
+
+            if (!context.Users.Any(u => u.Email == "DemoPM@Mailinator.com"))
+            {
+
+                userManager.Create(new ApplicationUser
+                {
+                    UserName = "DemoPM@Mailinator.com",
+                    Email = "DemoPM@Mailinator.com",
+                    FirstName = "Demo",
+                    LastName = "PM"
+
+
+                }, "Abc&123!");
+                var userId = userManager.FindByEmail("DemoPM@Mailinator.com").Id;
+                userManager.AddToRole(userId, "PM");
+
+
+            }
+
+            if (!context.Users.Any(u => u.Email == "DemoDevs@Mailinator.com"))
+            {
+
+                userManager.Create(new ApplicationUser
+                {
+                    UserName = "DemoDevs@Mailinator.com",
+                    Email = "DemoDevs@Mailinator.com",
+                    FirstName = "Demo",
+                    LastName = "Devs"
+
+
+                }, "Abc&123!");
+                var userId = userManager.FindByEmail("DemoDevs@Mailinator.com").Id;
+                userManager.AddToRole(userId, "Devs");
+
+
             }
         }     
     }

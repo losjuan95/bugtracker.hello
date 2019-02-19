@@ -76,6 +76,21 @@ namespace bugtracker.Helpers
             }
             return usersInRole;
         }
-        
+        public ICollection<string> GetProjectUserRolesName(string roleName, int projectId)
+        {
+            var users = UsersOnProject(projectId);
+            var usersInRole = new List<string>();
+            var roleHelper = new UserRolesHelpers();
+
+            foreach (var user in users)
+            {
+                if (roleHelper.IsUserInRole(user.Id, roleName))
+                {
+                    usersInRole.Add(user.FirstName);
+                }
+            }
+            return usersInRole;
+        }
+
     }
 }

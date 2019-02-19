@@ -13,10 +13,11 @@ namespace bugtracker.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
-            return View();
+           return View(db.TicketHistories.ToList());
         }
 
         public ActionResult About()
@@ -43,9 +44,9 @@ namespace bugtracker.Controllers
                 try
                 {
                     var body = "<p>Email From:<bold>{0}({1})</p><p>Message:</p><p>{2}</p>";
-                    var from = "CoreBlog<anyemailher@host.com>";
+                    var from = "BugTracker<anyemailher@host.com>";
 
-                    model.Body = "this is a message from your Blog site. The name and the email of the contacting person is above." + model.Body;
+                    model.Body = "this is a message from your BugTracker. The name and the email of the contacting person is above." + model.Body;
                     var email = new MailMessage(from, ConfigurationManager.AppSettings["emailto"])
                     {
                         Subject = model.Subject,

@@ -13,6 +13,9 @@ namespace bugtracker.Models
         public string CommentBody { get; set; }
 
         public DateTime Created { get; set; }
+        public DateTime? Updated { get; set; }
+
+        public string UpdateReason { get; set; }
 
         public string UserId { get; set; }
 

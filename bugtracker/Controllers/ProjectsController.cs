@@ -117,33 +117,33 @@ namespace bugtracker.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        
+
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description")] Project project, string PM, List<String> Subs, List<String> Devs)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description")] Project project, string ProjectManager, List<String> Submitters, List<String> Developers)
         {
             var projectUsers = projecthelper.UsersOnProject(project.Id);
             if (ModelState.IsValid) 
             {
-                if (PM != null)
+                if (ProjectManager != null)
                 {
                     foreach(var user in projectUsers.ToList())
                     {
                         projecthelper.RemoveUserFromProject(user.Id, project.Id);
                     }
-                    projecthelper.AddUserToProject(PM, project.Id);
+                    projecthelper.AddUserToProject(ProjectManager, project.Id);
 
                 }
-                if (Devs != null)
+                if (Developers != null)
                 {
-                    foreach (var user in Devs)
+                    foreach (var user in Developers)
                     {
                         projecthelper.AddUserToProject(user, project.Id);
                     }
                   
                 }
-                if (Subs != null)
+                if (Submitters != null)
                 {
-                    foreach (var user in Subs)
+                    foreach (var user in Submitters)
                     {
                         projecthelper.AddUserToProject(user, project.Id);
                     }

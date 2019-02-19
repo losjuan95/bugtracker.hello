@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using bugtracker.Models;
+using Microsoft.AspNet.Identity;
 
 namespace bugtracker.Controllers
 {
@@ -19,6 +20,22 @@ namespace bugtracker.Controllers
         {
             var ticketNotifications = db.TicketNotifications.Include(t => t.Recipient).Include(t => t.Ticket);
             return View(ticketNotifications.ToList());
+        }
+
+        // GET: TicketNotifications
+        public ActionResult MyIndex()
+        {
+            var userId = User.Identity.GetUserId();
+            var ticketNotifications = db.TicketNotifications.Include(t => t.Recipient).Include(t => t.Ticket).Where(t => t.RecipientId == userId && t.Read == false);
+            return View("Index", ticketNotifications.ToList());
+        }
+
+        public ActionResult MarkAsRead(int id)
+        {
+            var notification = db.TicketNotifications.Find(id);
+            db.TicketNotifications.Attach(notification);
+            notification.Read = true;
+            return Redirect(Request.ServerVariables["http_referer"]);
         }
 
         // GET: TicketNotifications/Details/5

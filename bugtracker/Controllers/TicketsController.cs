@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using bugtracker.Models;
+using Microsoft.AspNet.Identity;
+using bugtracker.Helpers;
 
 namespace bugtracker.Controllers
 {
@@ -14,15 +16,37 @@ namespace bugtracker.Controllers
     public class TicketsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        private ProjectHelpers Projecthelper = new ProjectHelpers();
         // GET: Tickets
         public ActionResult Index()
         {
-            var tickets = db.Tickets.Include(t => t.AssignedToUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketPriority).Include(t => t.TicketStatus).Include(t => t.TicketType);
-            return View(tickets.ToList());
+            var VM = new TicketsViewModel();
+            var currentUserId = User.Identity.GetUserId();
+            VM.AllTickets.AddRange(db.Tickets.ToList());
+            if (User.IsInRole("Sub"))
+            {
+                VM.SubTickets = db.Tickets.Where(t => t.OwnerUserId == currentUserId).ToList();
+            }
+            if (User.IsInRole("Devs"))
+            {
+                VM.DevTickets = db.Tickets.Where(t => t.AssignedToUserId == currentUserId).ToList();
+            }
+            if (User.IsInRole("Devs")|| User.IsInRole("PM"))
+            {
+                var MyProjects = Projecthelper.ListUserProjects(currentUserId);
+                foreach(var project in MyProjects)
+                {
+                    VM.ProjTickets.AddRange(project.Tickets);
+                }
+
+            }
+
+            return View(VM);
         }
 
         // GET: Tickets/Details/5
+        [Authorize(Roles = "Admin, Sub, PM, Dev")]
+
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -33,8 +57,19 @@ namespace bugtracker.Controllers
             if (ticket == null)
             {
                 return HttpNotFound();
+
+            }
+            if (User.IsInRole("Devs") && User.Identity.GetUserId() != ticket.AssignedToUserId)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (User.IsInRole("Sub")&& User.Identity.GetUserId()!= ticket.OwnerUserId)
+            {
+            return RedirectToAction("Index", "Home");
             }
             return View(ticket);
+
         }
 
         // GET: Tickets/Create
@@ -74,6 +109,9 @@ namespace bugtracker.Controllers
         }
 
         // GET: Tickets/Edit/5
+        [Authorize(Roles = "Admin, Sub, PM, Dev")]
+
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -103,8 +141,18 @@ namespace bugtracker.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                //getting a reference to the old ticket somehow
+                var oldTicket = db.Tickets.AsNoTracking().FirstOrDefault(t => t.Id == ticket.Id);
+
                 db.Entry(ticket).State = EntityState.Modified;
                 db.SaveChanges();
+
+                var notificationHelper = new NotificationHelper();
+                notificationHelper.Notify(oldTicket, ticket);
+                var historyHelper = new HistoryHelper();
+                historyHelper.AddHistory(oldTicket, ticket);
+
                 return RedirectToAction("Index");
             }
             ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FirstName", ticket.AssignedToUserId);
@@ -117,6 +165,8 @@ namespace bugtracker.Controllers
         }
 
         // GET: Tickets/Delete/5
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Delete(int? id)
         {
             if (id == null)

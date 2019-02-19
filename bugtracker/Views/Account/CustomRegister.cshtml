@@ -1,33 +1,50 @@
-﻿@{ 
+﻿@{
     Layout = null;
 }
 @model bugtracker.Models.RegisterViewModel
+@using bugtracker.Helpers
 
 
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="">
-    <title>SB Admin - Register</title>
-    <!-- Bootstrap core CSS-->
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom fonts for this template-->
-    <link href="~/Content/all.min.css" rel="stylesheet" type="text/css">
-    <!-- Custom styles for this template-->
-    <link href="~/Content/sb-admin.css" rel="stylesheet">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <title>Dashio - Bootstrap Admin Template</title>
+    <!-- Favicons -->
+
+    <link href="~/img/core icon.jpg" rel="icon" />
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!--external css-->
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="~/Content/style.css" rel="stylesheet" />
+
+    <link href="~/Content/style-responsive.css" rel="stylesheet" />
+
+    <!-- =======================================================
+      Template Name: Dashio
+      Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
+      Author: TemplateMag.com
+      License: https://templatemag.com/license/
+    ======================================================= -->
 </head>
 <body class="bg-dark">
     <div class="container">
         <div class="card card-register mx-auto mt-5">
-            <div class="card-header">Register an Account</div>
-            <div class="card-body">
-                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
+
+
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h2 class="form-login-heading">Create an Account</h2>
+                <div class="login-wrap">
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-6">
@@ -66,21 +83,20 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" >Register</button>
-                    
-                }
-                    <div class="text-center">
-                        @Html.ActionLink("Login Page", "CustomLogin", "Account", null)
-                        <br />
-                        @Html.ActionLink("Forgot Password", "CustomForgotPassword", "Account", null)
-                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            }
+            <div class="text-center">
+                @Html.ActionLink("Login Page", "CustomLogin", "Account", null)
+                <br />
+                @Html.ActionLink("Forgot Password", "CustomForgotPassword", "Account", null)
             </div>
         </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
+    </div>
+
     <script src="~/Scripts/jquery.min.js"></script>
-    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="~/Scripts/jquery.easing.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
 </body>
 </html>

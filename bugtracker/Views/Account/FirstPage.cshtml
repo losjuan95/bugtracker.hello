@@ -1,0 +1,128 @@
+﻿@{
+
+    Layout = null;
+}
+@using bugtracker.Helpers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <title>Dashio - Bootstrap Admin Template</title>
+
+    <!-- Favicons -->
+
+    <link href="~/img/core icon.jpg" rel="icon" />
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!--external css-->
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="~/Content/style.css" rel="stylesheet" />
+
+    <link href="~/Content/style-responsive.css" rel="stylesheet" />
+
+    <!-- =======================================================
+      Template Name: Dashio
+      Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
+      Author: TemplateMag.com
+      License: https://templatemag.com/license/
+    ======================================================= -->
+</head>
+<section style="background: url(../../img/adminback.jpeg); background-size: cover; background-position: center center" class="hero">
+    <div class="container">
+        
+        
+    </div>
+</section>
+<body>
+    <!--main content start-->
+    <section>
+        <section>
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- end col-4 -->
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="custom-box">
+                            <div class="servicetitle">
+                                <h4>Login</h4>
+                                <hr>
+                            </div>
+                            <div class="icn-main-container">
+                                <img class="img-circle" src="~/img/avatarimg1.jpg" width="220" />
+                            </div>
+                            <p>Log In and Lets Get Started</p>
+                            <ul class="pricing">
+                                <li>Already a User?</li>
+                                <li>Check your Dashboard</li>
+                                <li>Start a productive day</li>
+                            </ul>
+                            @Html.ActionLink("Login", "CustomLogin", "Account", null, new { @class = "btn btn-theme" })
+                        </div>
+                        <!-- end custombox -->
+                    </div>
+                    <!-- end col-4 -->
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="custom-box">
+                            <div class="servicetitle">
+                                <h4>Register</h4>
+                                <hr>
+                            </div>
+                            <div class="icn-main-container">
+                                <img class="img-circle" src="~/img/avatarimg4.jpg" width="200" />
+                            </div>
+                            <p>New User? Register Here!</p>
+                            <ul class="pricing">
+                                <li>Not a User?</li>
+                                <li>Well come in and register</li>
+                                <li>Start a new role</li>
+                            </ul>
+                            @Html.ActionLink("Register", "CustomRegister", "Account", null, new { @class = "btn btn-theme" })
+                        </div>
+                        <!-- end custombox -->
+                    </div>
+
+                    <!-- end col-4 -->
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="custom-box">
+                            <div class="servicetitle">
+                                <h4>Guest</h4>
+                                <hr>
+                            </div>
+                            <div class="icn-main-container">
+                                <img class="img-circle" src="~/img/avatarimg2.jpg" width="260" />
+                            </div>
+                            <p>Log in as Guest and you can select one of the four roles used in the BugTracker Application</p>
+                            <ul class="pricing">
+                                <li>Not a User?</li>
+                                <li>Try out the features by clicking on a role</li>
+                                <li>Check it out</li>
+                            </ul>
+                            @Html.ActionLink("Login", "DemoIndex", "Account", null, new { @class = "btn btn-theme" })
+                        </div>
+                        <!-- end custombox -->
+                    </div>
+                    <!-- end col-4 -->
+                </div>
+                <!--  /col-lg-12 -->
+            </div>
+            <!--  /row -->
+        </section>
+        <!-- /wrapper -->
+    </section>
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Scripts/jquery.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+    }
+</body>
+
+</html>

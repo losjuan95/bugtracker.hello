@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using bugtracker.Models;
 using System.Net.Mail;
+using System.Web.Configuration;
 
 namespace bugtracker.Controllers
 {
@@ -22,6 +23,19 @@ namespace bugtracker.Controllers
         public AccountController()
         {
         }
+
+        [AllowAnonymous]
+        public ActionResult FirstPage()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult DemoIndex()
+        {
+            return View();
+        }
+
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
@@ -73,19 +87,30 @@ namespace bugtracker.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl, string role)
         {
-            if (!ModelState.IsValid)
+            SignInStatus result;
+            if(string.IsNullOrEmpty(role))
             {
-                return View(model);
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             }
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            else
+            {
+                result = await SignInManager.PasswordSignInAsync(role, WebConfigurationManager.AppSettings["DemoPassword"], model.RememberMe, shouldLockout: false);
+            }
+            
+            
             switch (result)
             {
                 case SignInStatus.Success:
+                    //If the return Url is empty we can send the user anywhere we want to after they login
+                    //If the return Url is NOT empty, that means they tried getting to a view and were kicked out and need to be redirected after logging in
+                    if (string.IsNullOrEmpty(returnUrl))
+                        return RedirectToAction("Index", "Home");
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -220,7 +245,7 @@ namespace bugtracker.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     ViewBag.Message = "No Email found" + model.Email;
@@ -232,12 +257,24 @@ namespace bugtracker.Controllers
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                 //await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                
+                //Create a MailMessage object
+                var from = $"BugTracker<{WebConfigurationManager.AppSettings["emailfrom"]}>";
+                var message = new MailMessage(from, model.Email)
+                {
+                    Subject ="Reset Password",
+                    Body = "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>",
+                    IsBodyHtml = true
+                };
 
-                return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                var emailService = new PersonalEmail();
+                await emailService.SendAsync(message);
+
+                return View("ForgotPasswordConfirmation");
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View("CustomLogin", "AccountViewModel");
         }
 
         //

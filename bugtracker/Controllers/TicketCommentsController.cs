@@ -10,6 +10,7 @@ using bugtracker.Models;
 
 namespace bugtracker.Controllers
 {
+
     public class TicketCommentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -35,11 +36,11 @@ namespace bugtracker.Controllers
             }
             return View(ticketComment);
         }
-        
-        
 
-        // POST: TicketComments/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+
+
+        //POST: TicketComments/Create
+        //To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -48,18 +49,21 @@ namespace bugtracker.Controllers
             if (ModelState.IsValid)
             {
                 ticketComment.Created = DateTime.Now;
-                
                 db.TicketComments.Add(ticketComment);
                 db.SaveChanges();
-                return RedirectToAction("Details", "Tickets", new { id = ticketComment.TicketId });
+
             }
-           
+
+            return RedirectToAction("Details", "Tickets", new { id = ticketComment.TicketId });
 
             ViewBag.TicketId = new SelectList(db.Tickets, "Id", "Title", ticketComment.TicketId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", ticketComment.UserId);
             return View(ticketComment);
         }
+       
 
+       
+       
         // GET: TicketComments/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -74,7 +78,7 @@ namespace bugtracker.Controllers
             }
             ViewBag.TicketId = new SelectList(db.Tickets, "Id", "Title", ticketComment.TicketId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", ticketComment.UserId);
-            return View(ticketComment);
+            return View();
         }
 
         // POST: TicketComments/Edit/5
