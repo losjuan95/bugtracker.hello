@@ -1,0 +1,62 @@
+﻿body {
+    .bounce:hover
+
+{
+    animation: bounce 1s;
+    -webkit-animation: bounce 1s;
+}
+
+@keyframes bounce {
+    0% {
+        border-radius: 15px;
+    }
+
+    20% {
+        border-radius: 30px;
+    }
+
+    60% {
+        border-radius: 0px;
+        transform: scale(1.1);
+        -ms-transform: scale(1.1); /* IE 9 */
+        -webkit-transform: scale(1.1); /* Safari and Chrome */
+    }
+
+    90% {
+        transform: scale(0.98);
+        -ms-transform: scale(0.98); /* IE 9 */
+        -webkit-transform: scale(0.98); /* Safari and Chrome */
+    }
+
+    100% {
+        border-radius: 15px;
+    }
+}
+
+@-webkit-keyframes bounce {
+    0% {
+        border-radius: 15px;
+    }
+
+    20% {
+        border-radius: 30px;
+    }
+
+    60% {
+        border-radius: 0px;
+        transform: scale(1.1);
+        -ms-transform: scale(1.1); /* IE 9 */
+        -webkit-transform: scale(1.1); /* Safari and Chrome */
+    }
+
+    90% {
+        transform: scale(0.98);
+        -ms-transform: scale(0.98); /* IE 9 */
+        -webkit-transform: scale(0.98); /* Safari and Chrome */
+    }
+
+    100% {
+        border-radius: 15px;
+    }
+}  
+}

@@ -234,6 +234,7 @@
     <Content Include="Content\zabuto_calendar.css" />
     <Content Include="custom Css\demoindex.css" />
     <Content Include="custom Css\profile.css" />
+    <Content Include="custom Css\tickdet.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
