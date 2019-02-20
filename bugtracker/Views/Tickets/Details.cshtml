@@ -1,238 +1,260 @@
-﻿@model bugtracker.Models.Ticket
+﻿@using bugtracker.Models
+@using bugtracker.Helpers
+
+@model Ticket
+
+
+
 
 
 @{
     ViewBag.Title = "Details";
+    var historyHelper = new HistoryHelper();
 }
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <link href="~/custom Css/tickdet.css" rel="stylesheet" />
 </head>
+<body>
+    <section id="main-content">
+        <section class="wrapper site-min-height">
+            <h3><i class="fa fa-angle-right"></i> Details</h3>
+            <div class="row mt">
+                <div class="col-lg-12">
 
-<section id="main-content">
-    <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> Details</h3>
-        <div class="row mt">
-            <div class="col-lg-12">
+                    <div>
+                        <h4>Ticket</h4>
+                        <hr />
 
-                <div>
-                    <h4>Ticket</h4>
-                    <hr />
-
-                    <div class="col-md-8">
-                        <div class="row">
-                            <dl class="dl-horizontal">
-                                @*need to figure out what i want my users to see in the details section.*@
-                                @using (Html.BeginForm())
-                                {
+                        <div class="col-md-8">
+                            <div class="row">
+                                <dl class="dl-horizontal">
+                                    @*need to figure out what i want my users to see in the details section.*@
+                                    @using (Html.BeginForm())
+                                    {
                                     <div class="form-horizontal">
                                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                         @Html.HiddenFor(m => m.Id)
                                         <button class="bounce">
-                                            @Html.DisplayNameFor(m => m.TicketPriority)
+                                            @Html.Label("Ticket Priority:")
                                             @Html.DisplayTextFor(m => m.TicketPriority.Name)
                                         </button>
-                                        <div class="form-group">
 
-
-                                        </div>
-                                        <div class="form-group">
-                                            @Html.Label("AssignedTo")
+                                        <button class="bounce">
+                                            @Html.Label("Assigned To:")
                                             @Html.DisplayTextFor(m => m.AssignedToUser.FirstName)
-                                        </div>
+                                        </button>
+
+                                        <button class="bounce">
+                                            @Html.Label("Ticket Status:")
+                              
+                                            @Html.DisplayTextFor(m => m.TicketStatus.Name)
+                                        </button>
+
+                                        <button class="bounce">
+                                            @Html.Label("Ticket Type:")
+                                            @Html.DisplayTextFor(m => m.TicketType.Name)
+                                        </button>
 
                                     </div>
 
 
+                                    }
+                                    </dl>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!--main content start-->
+                                    <section>
+                                        <section class="wrapper site-min-height">
+                                            <!-- page start-->
+                                            <div class="chat-room mt">
+                                                <aside class="mid-side">
+                                                    <div class="chat-room-head">
+                                                        <h3>Comments</h3>
+
+                                                    </div>
+                                                    @foreach (var comment in Model.TicketComments.OrderByDescending(c => c.Created))
+                                                    {
+                                                        <div class="group-rom">
+                                                            <div class="first-part odd">@comment.User.FirstName</div>
+                                                            <div class="second-part">
+                                                                @Html.Raw(comment.CommentBody)
+                                                            </div>
+                                                            <div class="third-part">@comment.Created.ToString("hh:mm")</div>
+                                                        </div>
+                                                    }
+
+
+                                                        <footer>
+                                                            @using (Html.BeginForm("Create", "TicketComments", FormMethod.Post))
+                                                            {
+                                                                @Html.AntiForgeryToken()
+                                                               
+                                                                @Html.Hidden("TicketId", Model.Id)
+                                                                @Html.Editor("CommentBody", new { @class = "form-control" })
+                                                                <button type="submit" class="btn btn-theme">Send</button>
+                                                                <div class="btn-group hidden-sm hidden-xs">
+                                                                    <button type="button" class="btn btn-white"><i class="fa fa-meh-o"></i></button>
+                                                                    <button type="button" class="btn btn-white"><i class=" fa fa-paperclip"></i></button>
+                                                                </div>
+
+                                                            }
+                                                            @*<div class="chat-txt">
+            <input type="text" class="form-control">
+        </div>*@
+
+                                                        </footer>
+                                                </aside>
+                                                <aside class="right-side">
+                                                    <div class="user-head">
+                                                        <a href="#" class="chat-tools btn-theme"><i class="fa fa-cog"></i> </a>
+                                                        <a href="#" class="chat-tools btn-theme03"><i class="fa fa-key"></i> </a>
+                                                    </div>
+                                                    <div class="invite-row">
+                                                        <h4 class="pull-left">Team Members</h4>
+                                                        <a href="#" class="btn btn-theme04 pull-right">+ Invite</a>
+                                                    </div>
+                                                    <ul class="chat-available-user">
+                                                        <li>
+                                                            <a href="chat_room.html">
+                                                                <img class="img-circle" src="img/friends/fr-02.jpg" width="32">
+                                                                Paul Brown
+                                                                <span class="text-muted">1h:02m</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="chat_room.html">
+                                                                <img class="img-circle" src="img/friends/fr-05.jpg" width="32">
+                                                                David Duncan
+                                                                <span class="text-muted">1h:08m</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="chat_room.html">
+                                                                <img class="img-circle" src="img/friends/fr-07.jpg" width="32">
+                                                                Laura Smith
+                                                                <span class="text-muted">1h:10m</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="chat_room.html">
+                                                                <img class="img-circle" src="img/friends/fr-08.jpg" width="32">
+                                                                Julia Schultz
+                                                                <span class="text-muted">3h:00m</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="chat_room.html">
+                                                                <img class="img-circle" src="img/friends/fr-01.jpg" width="32">
+                                                                Frank Arias
+                                                                <span class="text-muted">4h:22m</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </aside>
+                                            </div>
+                                            <!-- page end-->
+                                        </section>
+                                        <!-- /wrapper -->
+                                    </section>
+                                    <!-- /MAIN CONTENT -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                @foreach (var tickethistory in Model.TicketHistories.OrderByDescending(m => m.Changed))
+                                {
+                                    <!-- First Activity -->
+                                    <div class="desc">
+                                        <div class="thumb">
+                                            <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
+                                        </div>
+                                        <div class="details">
+                                            <p>
+                                                <muted>@tickethistory.Changed</muted>
+                                                <br />
+                                                @*<a href="#">Paul Rudd</a> purchased an item.<br />*@
+                                                @tickethistory.PropertyName changed from @tickethistory.OldValue to @tickethistory.NewValue
+                                            </p>
+                                        </div>
+                                    </div>
                                 }
 
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!--main content start-->
-                                <section id="main-content">
-                                    <section class="wrapper site-min-height">
-                                        <!-- page start-->
-                                        <div class="chat-room mt">
-                                            <aside class="mid-side">
-                                                <div class="chat-room-head">
-                                                    <h3>Chat Room: Support</h3>
-                                                    <form action="#" class="pull-right position">
-                                                        <input type="text" placeholder="Search" class="form-control search-btn ">
-                                                    </form>
-                                                </div>
-
-                                                <div class="group-rom">
-                                                    <div class="first-part odd">Sam Soffes</div>
-                                                    <div class="second-part">Hi Mark, have a minute?</div>
-                                                    <div class="third-part">12:30</div>
-                                                </div>
-
-                                                <footer>
-                                                    <div class="chat-txt">
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                    <div class="btn-group hidden-sm hidden-xs">
-                                                        <button type="button" class="btn btn-white"><i class="fa fa-meh-o"></i></button>
-                                                        <button type="button" class="btn btn-white"><i class=" fa fa-paperclip"></i></button>
-                                                    </div>
-                                                    <button class="btn btn-theme">Send</button>
-                                                </footer>
-                                            </aside>
-                                            <aside class="right-side">
-                                                <div class="user-head">
-                                                    <a href="#" class="chat-tools btn-theme"><i class="fa fa-cog"></i> </a>
-                                                    <a href="#" class="chat-tools btn-theme03"><i class="fa fa-key"></i> </a>
-                                                </div>
-                                                <div class="invite-row">
-                                                    <h4 class="pull-left">Team Members</h4>
-                                                    <a href="#" class="btn btn-theme04 pull-right">+ Invite</a>
-                                                </div>
-                                                <ul class="chat-available-user">
-                                                    <li>
-                                                        <a href="chat_room.html">
-                                                            <img class="img-circle" src="img/friends/fr-02.jpg" width="32">
-                                                            Paul Brown
-                                                            <span class="text-muted">1h:02m</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="chat_room.html">
-                                                            <img class="img-circle" src="img/friends/fr-05.jpg" width="32">
-                                                            David Duncan
-                                                            <span class="text-muted">1h:08m</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="chat_room.html">
-                                                            <img class="img-circle" src="img/friends/fr-07.jpg" width="32">
-                                                            Laura Smith
-                                                            <span class="text-muted">1h:10m</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="chat_room.html">
-                                                            <img class="img-circle" src="img/friends/fr-08.jpg" width="32">
-                                                            Julia Schultz
-                                                            <span class="text-muted">3h:00m</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="chat_room.html">
-                                                            <img class="img-circle" src="img/friends/fr-01.jpg" width="32">
-                                                            Frank Arias
-                                                            <span class="text-muted">4h:22m</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </aside>
-                                        </div>
-                                        <!-- page end-->
-                                    </section>
-                                    <!-- /wrapper -->
-                                </section>
-                                <!-- /MAIN CONTENT -->
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="row">
-                            @*@foreach (var tickethistory in Model.TicketHistory)
-                                { }*@
-
-                            <!-- First Activity -->
-                            <div class="desc">
-                                <div class="thumb">
-                                    <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                                </div>
-                                <div class="details">
-                                    <p>
-                                        <muted>Just Now</muted>
-                                        <br />
-                                        <a href="#">@User.Identity.Name</a> Made a change<br />
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
                             <div class="row">
-                                <div class="col-md-8">
-                                    <!-- row -->
-                                    <!--ADVANCED FILE INPUT-->
-                                    <div class="row mt">
-                                        <div class="col-lg-12">
-                                            <div class="form-panel">
-                                                <form action="#" class="form-horizontal style-form">
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3">Default</label>
-                                                        <div class="col-md-4">
-                                                            <input type="file" class="default" />
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <!-- row -->
+                                        <!--ADVANCED FILE INPUT-->
+                                        <div class="row mt">
+                                            <div class="col-lg-12">
+                                                @using (Html.BeginForm("Create", "TicketAttachments", FormMethod.Post, new { enctype = "Multipart/form-data" }))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    @Html.Hidden("TicketId", Model.Id)
+                                                    <div class="form-panel">
+                                                        @*<form action="#" class="form-horizontal style-form">*@
+
+
+                                                        <div class="form-group">
+                                                            <input name="file" type="file" class="form-control" id="fileUpload" />
+
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3">Without input</label>
-                                                        <div class="controls col-md-9">
-                                                            <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                                <span class="btn btn-theme02 btn-file">
-                                                                    <span class="fileupload-new"><i class="fa fa-paperclip"></i> Select file</span>
-                                                                    <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
-                                                                    <input type="file" class="default" />
-                                                                </span>
-                                                                <span class="fileupload-preview" style="margin-left:5px;"></span>
-                                                                <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
-                                                            </div>
+                                                        <div class="form-group">
+                                                            <input type="text" name="attachmentDescription"/>
+
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group last">
-                                                        <label class="control-label col-md-3">Image Upload</label>
-                                                        <div class="col-md-9">
-                                                            <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                                                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" alt="" />
-                                                                </div>
-                                                                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                                                                <div>
+                                                        <div class="form-group">
+                                                            
+                                                            <button type="submit">Submit</button>
+                                                        </div>
+
+                                                        @*<div class="form-group">
+                                                            <label class="control-label col-md-3">Without input</label>
+                                                            <div class="controls col-md-9">
+                                                                <div class="fileupload fileupload-new" data-provides="fileupload">
                                                                     <span class="btn btn-theme02 btn-file">
-                                                                        <span class="fileupload-new"><i class="fa fa-paperclip"></i> Select image</span>
+                                                                        <span class="fileupload-new"><i class="fa fa-paperclip"></i> Select file</span>
                                                                         <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
-                                                                        <input type="file" class="default" />
+                                                                        <input type="file" class="default"/>
                                                                     </span>
-                                                                    <a href="advanced_form_components.html#" class="btn btn-theme04 fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+                                                                    <span class="fileupload-preview" style="margin-left:5px;"></span>
+                                                                    <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
+                                                                    <button type="submit" class="btn btn-theme">Submit</button>
                                                                 </div>
                                                             </div>
-                                                            <span class="label label-info">NOTE!</span>
-                                                            <span>
-                                                                Attached image thumbnail is
-                                                                supported in Latest Firefox, Chrome, Opera,
-                                                                Safari and Internet Explorer 10 only
-                                                            </span>
-                                                        </div>
+                                                        </div>*@
+
+                                                        @*</form>*@
                                                     </div>
-                                                </form>
+                                                }
+
+                                                <!-- /form-panel -->
                                             </div>
-                                            <!-- /form-panel -->
+                                            <!-- /col-lg-12 -->
                                         </div>
-                                        <!-- /col-lg-12 -->
+                                        <!-- row -->
                                     </div>
-                                    <!-- row -->
                                 </div>
                             </div>
                         </div>
+
                     </div>
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                        @Html.ActionLink("Back to List", "Index")
+                    </p>
 
                 </div>
-                <p>
-                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-                    @Html.ActionLink("Back to List", "Index")
-                </p>
-
             </div>
-        </div>
+        </section>
     </section>
-</section>
+</body>
+
 </html>
 
 

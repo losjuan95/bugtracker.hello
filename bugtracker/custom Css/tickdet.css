@@ -1,5 +1,24 @@
 ﻿body {
-    .bounce:hover
+    font-family: Arial,Helvetica,sans-serif;
+    color: #555;
+    background: #ddd;
+}
+.bounce {
+    padding: 0.8em 0em;
+    width: 350px;
+    background: #176B67;
+    border-radius: 15px;
+    border: 0;
+    color: #fff;
+    font-size: 1.2em;
+    font-family: Arial,Helvetica,sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 1em 2em;
+    text-transform: uppercase;
+}
+
+.bounce:hover
 
 {
     animation: bounce 1s;
@@ -59,4 +78,4 @@
         border-radius: 15px;
     }
 }  
-}
+

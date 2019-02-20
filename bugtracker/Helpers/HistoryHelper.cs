@@ -50,6 +50,18 @@ namespace bugtracker.Helpers
             db.SaveChanges();
 
         }
+
+        //public TicketHistory Convert(string propertyName, int Id)
+        //{
+        //    var tickethistory = new TicketHistory();
+        //    var name = new propertyName.convert
+        //    foreach(var tickethistory in id)
+        //    {
+
+        //    }
+        //    return Convert();
+        //}
+
         public TicketHistory Createhistory(string propertyName, string oldValue, string newValue, int ticketId)
         {
             var history = new TicketHistory()
