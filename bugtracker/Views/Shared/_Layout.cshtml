@@ -59,7 +59,7 @@
                     
                     <!-- notification dropdown start-->
                     <li id="header_notification_bar" class="dropdown">
-                        <a href="@Url.Action("Index", "TicketNotifications", new { @class="data-toggle dropdown-toggle fa fa-bell-o"})">
+                        <a href="@Url.Action("MyIndex", "TicketNotifications", new { @class="data-toggle dropdown-toggle fa fa-bell-o"})">
                            <i class="fa fa-bell-o"></i>
                             <span class="badge bg-warning"></span>
                         </a>
@@ -103,30 +103,27 @@
                             <span>My Profile</span>
                         </a>
                     </li>
-                    <li>
-                        @Html.ActionLink("DashBoard", "Index", "Home", new { @class = "fa fa-dashboard active" })
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            @Html.ActionLink("DashBoard", "Index", "Home", new { @class = "fa fa-dashboard active" })
 
-                    </li>
+                        </li>
+                    }
+
                     <li class="sub-menu">
-                        <a href="javascript:;">
+                        <a href="@Url.Action("Index","Projects")">
                             <i class="fa fa-desktop"></i>
                             <span>Projects</span>
                         </a>
-                        <ul class="sub">
-                            <li>@Html.ActionLink("All Projects", "Index", "Projects")</li>
-                            <li><a href="buttons.html">My Projects</a></li>
-
-                        </ul>
+                        
                     </li>
                     <li class="sub-menu">
-                        <a href="javascript:;">
+                        <a href="@Url.Action("Index","Tickets")">
                             <i class="fa fa-cogs"></i>
                             <span>Tickets</span>
                         </a>
-                        <ul class="sub">
-                            <li>@Html.ActionLink("All Tickets", "Index", "Tickets")</li>
-
-                        </ul>
+                        
                     </li>
 
                     @if (User.Identity.IsAuthenticated)
@@ -141,15 +138,11 @@
                     @if (User.IsInRole("Admin"))
                     {
                         <li class="sub-menu">
-                            <a href="javascript:;">
+                            <a href="@Url.Action("AssignRole","Admin")">
                                 <i class="fa fa-desktop"></i>
                                 <span>Users</span>
                             </a>
-                            <ul class="sub">
-                                <li>@Html.ActionLink("All Users", "AssignRole", "Admin")</li>
-                                <li><a href="buttons.html">My Projects</a></li>
-
-                            </ul>
+                          
                         </li>
                     }
 
@@ -189,7 +182,7 @@
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="~/Scripts/jquery.min.js"></script>
 
-    <script src="~/Scripts/vendor/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 
     <script src="~/Scripts/jquery.dcjqaccordion.2.7.js"></script>
     <script src="~/Scripts/jquery.scrollTo.min.js"></script>
@@ -226,7 +219,7 @@
               return false;
             });
         </script>*@
-        <script type="application/javascript">
+        @*<script type="application/javascript">
             $(document).ready(function() {
               $("#date-popover").popover({
                 html: true,
@@ -267,7 +260,7 @@
               var to = $("#" + id).data("to");
               console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
             }
-        </script>
+        </script>*@
 </body>
 
 </html>
