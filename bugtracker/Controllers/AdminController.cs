@@ -51,7 +51,7 @@ namespace bugtracker.Controllers
             roleHelper.AddUserToRole(users, roles);
 
 
-            return RedirectToAction("Index", "Projects");
+            return RedirectToAction("AssignRole", "Admin");
         }
 
         [HttpGet]

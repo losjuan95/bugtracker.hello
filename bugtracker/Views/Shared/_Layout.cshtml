@@ -94,18 +94,18 @@
             <div id="sidebar" class="nav-collapse ">
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
-                    
+
                     <h5 class="centered">@UserHelper.GetFirstName()</h5>
                     <li>
-                      
+
                         <a href="@Url.Action("Index","Manage")">
-                            <i class="fa-user-circle-o"></i>
+                            <i class="fa fa-user-circle-o"></i>
                             <span>My Profile</span>
                         </a>
                     </li>
-                    <li class="mt fa-user">
-                        @Html.ActionLink("DashBoard", "Index", "Home", new { @class="fa fa-dashboard active"})
-                        
+                    <li>
+                        @Html.ActionLink("DashBoard", "Index", "Home", new { @class = "fa fa-dashboard active" })
+
                     </li>
                     <li class="sub-menu">
                         <a href="javascript:;">
@@ -126,11 +126,6 @@
                         <ul class="sub">
                             <li>@Html.ActionLink("All Tickets", "Index", "Tickets")</li>
 
-                            <li><a href="calendar.html">My Tickets</a></li>
-                            <li><a href="gallery.html">High Priority Tickets</a></li>
-                            <li><a href="todo_list.html">Unassigned Tickets</a></li>
-                            <li>@Html.ActionLink("TicketAttachments", "Index", "TicketAttachments")</li>
-                            <li>@Html.ActionLink("TicketComments", "Index", "TicketComments")</li>
                         </ul>
                     </li>
 
@@ -143,18 +138,21 @@
                             </a>
                         </li>
                     }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-desktop"></i>
+                                <span>Users</span>
+                            </a>
+                            <ul class="sub">
+                                <li>@Html.ActionLink("All Users", "AssignRole", "Admin")</li>
+                                <li><a href="buttons.html">My Projects</a></li>
 
-                    <li class="sub-menu">
-                        <a href="javascript:;">
-                            <i class="fa fa-desktop"></i>
-                            <span>Users</span>
-                        </a>
-                        <ul class="sub">
-                            <li>@Html.ActionLink("All Users", "AssignRole", "Admin")</li>
-                            <li><a href="buttons.html">My Projects</a></li>
+                            </ul>
+                        </li>
+                    }
 
-                        </ul>
-                    </li>
 
                     @*<li>
             <a href="inbox.html">
@@ -178,9 +176,11 @@
                 <p>
                     &copy; Copyrights <strong>BugTracker<strong>.All Rights Reserved
                 </p>
+               
 
-                <a href="index.html#" class="go-top">
-                    <i class="fa fa-angle-up"></i>
+
+                <a href="">
+                    <i class="fa fa-angle-up go-top"></i>
                 </a>
             </div>
         </footer>
@@ -275,6 +275,6 @@
 
 <script>
     $(document).ready(function () {
-        $('.jq-data').DataTable();
+        $('#jq-data').DataTable();
     });
 </script>

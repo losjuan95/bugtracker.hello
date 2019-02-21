@@ -53,10 +53,14 @@
                         </div>
                         @if (User.IsInRole("Sub"))
                         {
+
                             <div class="content-panel">
                                 <table class="table table-striped table-advance table-hover mytable">
                                     <h4><i class="fa fa-angle-right"></i>Ticket Table</h4>
-                                      <thead>
+                                  
+                                        @Html.ActionLink("Create New Ticket", "Create")
+                                 
+                                    <thead>
                                         <tr>
                                             <th clasas="hidden-phone">Title</th>
                                             <th class="hidden-phone">AssignedUserID</th>
@@ -141,7 +145,7 @@
                                 </table>
                             </div>
                         }
-                        @if (User.IsInRole("Dev")|| User.IsInRole("PM"))
+                        @if (User.IsInRole("Devs")|| User.IsInRole("PM"))
                         {
                             <div class="content-panel">
                                 <table class="table table-striped table-advance table-hover mytable">
@@ -157,7 +161,7 @@
                                             <th class="hidden-phone">TicketPriorityId</th>
                                             <th class="hidden-phone">TicketStatusId</th>
                                         </tr>
-                                    </thead>
+                                   </thead>
                                     <tbody>
                                         @foreach (var ticket in Model.ProjTickets.OrderBy(t => t.Created))
                                         {

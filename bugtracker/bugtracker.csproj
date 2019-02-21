@@ -207,6 +207,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\ProjectsViewModel.cs" />
     <Compile Include="Models\TicketAttachment.cs" />
     <Compile Include="Models\TicketComment.cs" />
     <Compile Include="Models\TicketHistory.cs" />
@@ -221,9 +222,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\all.min.css" />
+    <Content Include="Content\bootstrap-fileupload.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Chart.js" />
+    <Content Include="Content\datepicker.css" />
+    <Content Include="Content\daterangepicker.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\jquery.gritter.css" />
@@ -231,6 +235,7 @@
     <Content Include="Content\sb-admin.min.css" />
     <Content Include="Content\style-responsive.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\timepicker.css" />
     <Content Include="Content\zabuto_calendar.css" />
     <Content Include="custom Css\demoindex.css" />
     <Content Include="custom Css\profile.css" />
@@ -264,9 +269,16 @@
     </Content>
     <None Include="Properties\PublishProfiles\coreTracker - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\coreTracker - Web Deploy.pubxml" />
+    <Content Include="Scripts\advanced-form-components.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-fileupload.js" />
+    <Content Include="Scripts\bootstrap-timepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\common-scripts.js" />
+    <Content Include="Scripts\date.js" />
+    <Content Include="Scripts\daterangepicker.js" />
     <Content Include="Scripts\gritter-conf.js" />
     <Content Include="Scripts\jquery.backstretch.min.js" />
     <Content Include="Scripts\jquery.dcjqaccordion.2.7.js" />
@@ -276,6 +288,7 @@
     <Content Include="Scripts\jquery.nicescroll.js" />
     <Content Include="Scripts\jquery.scrollTo.min.js" />
     <Content Include="Scripts\jquery.sparkline.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\sparkline-chart.js" />
     <Content Include="Scripts\zabuto_calendar.js" />
     <Content Include="Web.config" />

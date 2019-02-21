@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <title>Dashio - Bootstrap Admin Template</title>
+    <title>CoreTracker</title>
     <!-- Favicons -->
 
     <link href="~/img/core icon.jpg" rel="icon" />
@@ -37,10 +37,8 @@
 </head>
 <body class="bg-dark">
     <div class="container">
-        <div class="card card-register mx-auto mt-5">
-
-
-            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+       
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-login", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 <h2 class="form-login-heading">Create an Account</h2>
@@ -50,50 +48,51 @@
                             <div class="col-md-6">
                                 <div class="form-label-group">
                                     <input type="text" Name="FirstName" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
-                                    <label for="firstName">First name</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-label-group">
                                     <input type="text" Name="LastName" id="lastName" class="form-control" placeholder="Last name" required="required">
-                                    <label for="lastName">Last name</label>
+
                                 </div>
                             </div>
                         </div>
+
                     </div>
+                    <br />
+                    <br />
                     <div class="form-group">
-                        <div class="form-label-group">
-                            <input type="email" Name="Email" id="inputEmail" class="form-control" placeholder="Email address" required="required">
-                            <label for="inputEmail">Email address</label>
-                        </div>
+                        @Html.TextBoxFor(m => m.Email, new { placeholder = "Email", @class = "form-control" })
+
                     </div>
+                    <br />
                     <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-md-6">
-                                <div class="form-label-group">
-                                    <input type="password" Name="Password" id="inputPassword" class="form-control" placeholder="Password" required="required">
-                                    <label for="inputPassword">Password</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-label-group">
-                                    <input type="password" Name="ConfirmPassword" id="confirmPassword" class="form-control" placeholder="Confirm password" required="required">
-                                    <label for="confirmPassword">Confirm password</label>
-                                </div>
-                            </div>
-                        </div>
+                        @Html.PasswordFor(m => m.Password, new { placeholder = "Password", @class = "form-control" })
                     </div>
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <br />
+                    <div class="form-group">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirm Password", @class = "form-control" })
+                    </div>
+
+
+                    <span class="pull-right">
+                        <div class="text-center">
+                            @Html.ActionLink("Login Page", "CustomLogin", "Account", null)
+                            <br />
+                            @Html.ActionLink("Forgot Password", "CustomForgotPassword", "Account", null)
+                        </div>
+                    </span>
+                    <br />
+                    <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> Register</button>
+
+
+
                 </div>
-            }
-            <div class="text-center">
-                @Html.ActionLink("Login Page", "CustomLogin", "Account", null)
-                <br />
-                @Html.ActionLink("Forgot Password", "CustomForgotPassword", "Account", null)
-            </div>
-        </div>
+                }
+
+               
     </div>
-    </div>
+ 
 
     <script src="~/Scripts/jquery.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>

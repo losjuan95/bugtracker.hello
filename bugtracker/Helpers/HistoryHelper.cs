@@ -51,16 +51,7 @@ namespace bugtracker.Helpers
 
         }
 
-        //public TicketHistory Convert(string propertyName, int Id)
-        //{
-        //    var tickethistory = new TicketHistory();
-        //    var name = new propertyName.convert
-        //    foreach(var tickethistory in id)
-        //    {
 
-        //    }
-        //    return Convert();
-        //}
 
         public TicketHistory Createhistory(string propertyName, string oldValue, string newValue, int ticketId)
         {
@@ -75,7 +66,34 @@ namespace bugtracker.Helpers
             };
             return history;
         }
-        
+
+
+        private static ApplicationDbContext dbStatic = new ApplicationDbContext();
+
+        public static string ConvertToName(string propertyName, string Id)
+        {
+            var name = "";
+            if (propertyName == "TicketStatusId")
+            {
+                name = dbStatic.TicketStatuses.Find(Convert.ToInt32(Id)).Name;
+            }
+            if (propertyName == "TicketTypeId")
+            {
+                name = dbStatic.TicketTypes.Find(Convert.ToInt32(Id)).Name;
+            }
+            if (propertyName == "TicketPriorityId")
+            {
+                name = dbStatic.TicketPriorities.Find(Convert.ToInt32(Id)).Name;
+            }
+            if (propertyName == "AssignedToUserId")
+            {
+                name = dbStatic.Users.Find(Id).FirstName;
+            }
+
+
+            return name;
+        }
+
     }
 
 }

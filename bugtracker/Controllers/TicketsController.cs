@@ -12,11 +12,12 @@ using bugtracker.Helpers;
 
 namespace bugtracker.Controllers
 {
-    [Authorize(Roles="Admin, Sub, PM, Dev")]
+    [Authorize(Roles="Admin, Sub, PM, Devs")]
     public class TicketsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private ProjectHelpers Projecthelper = new ProjectHelpers();
+        private UserRolesHelpers Userrolehelper = new UserRolesHelpers();
         // GET: Tickets
         public ActionResult Index()
         {
@@ -110,9 +111,7 @@ namespace bugtracker.Controllers
 
         // GET: Tickets/Edit/5
         [Authorize(Roles = "Admin, Sub, PM, Dev")]
-
-
-        public ActionResult Edit(int? id)
+         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -123,7 +122,8 @@ namespace bugtracker.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FirstName", ticket.AssignedToUserId);
+            var devhelper = Userrolehelper.UsersInRole("Devs");
+            ViewBag.AssignedToUserId = new SelectList(devhelper, "Id", "FirstName", ticket.AssignedToUserId);
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName", ticket.OwnerUserId);
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", ticket.ProjectId);
             ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name", ticket.TicketPriorityId);

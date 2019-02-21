@@ -9,12 +9,19 @@
 
 @{
     ViewBag.Title = "Details";
-    var historyHelper = new HistoryHelper();
+   
 }
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <link href="~/custom Css/tickdet.css" rel="stylesheet" />
+
+
+    <link href="~/Content/bootstrap-fileupload.css" rel="stylesheet" />
+    <link href="~/Content/datepicker.css" rel="stylesheet" />
+    <link href="~/Content/daterangepicker.css" rel="stylesheet" />
+    <link href="~/Content/timepicker.css" rel="stylesheet" />
+
 </head>
 <body>
     <section id="main-content">
@@ -33,35 +40,35 @@
                                     @*need to figure out what i want my users to see in the details section.*@
                                     @using (Html.BeginForm())
                                     {
-                                    <div class="form-horizontal">
-                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                        @Html.HiddenFor(m => m.Id)
-                                        <button class="bounce">
-                                            @Html.Label("Ticket Priority:")
-                                            @Html.DisplayTextFor(m => m.TicketPriority.Name)
-                                        </button>
+                                        <div class="form-horizontal">
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            @Html.HiddenFor(m => m.Id)
+                                            <button class="bounce">
+                                                @Html.Label("Ticket Priority:")
+                                                @Html.DisplayTextFor(m => m.TicketPriority.Name)
+                                            </button>
 
-                                        <button class="bounce">
-                                            @Html.Label("Assigned To:")
-                                            @Html.DisplayTextFor(m => m.AssignedToUser.FirstName)
-                                        </button>
+                                            <button class="bounce">
+                                                @Html.Label("Assigned To:")
+                                                @Html.DisplayTextFor(m => m.AssignedToUser.FirstName)
+                                            </button>
 
-                                        <button class="bounce">
-                                            @Html.Label("Ticket Status:")
-                              
-                                            @Html.DisplayTextFor(m => m.TicketStatus.Name)
-                                        </button>
+                                            <button class="bounce">
+                                                @Html.Label("Ticket Status:")
 
-                                        <button class="bounce">
-                                            @Html.Label("Ticket Type:")
-                                            @Html.DisplayTextFor(m => m.TicketType.Name)
-                                        </button>
+                                                @Html.DisplayTextFor(m => m.TicketStatus.Name)
+                                            </button>
 
-                                    </div>
+                                            <button class="bounce">
+                                                @Html.Label("Ticket Type:")
+                                                @Html.DisplayTextFor(m => m.TicketType.Name)
+                                            </button>
+
+                                        </div>
 
 
                                     }
-                                    </dl>
+                                </dl>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -87,25 +94,25 @@
                                                     }
 
 
-                                                        <footer>
-                                                            @using (Html.BeginForm("Create", "TicketComments", FormMethod.Post))
-                                                            {
-                                                                @Html.AntiForgeryToken()
-                                                               
-                                                                @Html.Hidden("TicketId", Model.Id)
-                                                                @Html.Editor("CommentBody", new { @class = "form-control" })
-                                                                <button type="submit" class="btn btn-theme">Send</button>
-                                                                <div class="btn-group hidden-sm hidden-xs">
-                                                                    <button type="button" class="btn btn-white"><i class="fa fa-meh-o"></i></button>
-                                                                    <button type="button" class="btn btn-white"><i class=" fa fa-paperclip"></i></button>
-                                                                </div>
+                                                    <footer>
+                                                        @using (Html.BeginForm("Create", "TicketComments", FormMethod.Post))
+                                                        {
+                                                            @Html.AntiForgeryToken()
 
-                                                            }
-                                                            @*<div class="chat-txt">
-            <input type="text" class="form-control">
-        </div>*@
+                                                            @Html.Hidden("TicketId", Model.Id)
+                                                            @Html.Editor("CommentBody", new { @class = "form-control" })
+                                                            <button type="submit" class="btn btn-theme">Send</button>
+                                                            <div class="btn-group hidden-sm hidden-xs">
+                                                                <button type="button" class="btn btn-white"><i class="fa fa-meh-o"></i></button>
+                                                                <button type="button" class="btn btn-white"><i class=" fa fa-paperclip"></i></button>
+                                                            </div>
 
-                                                        </footer>
+                                                        }
+                                                        @*<div class="chat-txt">
+                                                                <input type="text" class="form-control">
+                                                            </div>*@
+
+                                                    </footer>
                                                 </aside>
                                                 <aside class="right-side">
                                                     <div class="user-head">
@@ -174,12 +181,35 @@
                                             <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
                                         </div>
                                         <div class="details">
-                                            <p>
-                                                <muted>@tickethistory.Changed</muted>
-                                                <br />
-                                                @*<a href="#">Paul Rudd</a> purchased an item.<br />*@
-                                                @tickethistory.PropertyName changed from @tickethistory.OldValue to @tickethistory.NewValue
-                                            </p>
+                                            @if (tickethistory.PropertyName == "TicketStatusId" || tickethistory.PropertyName == "TicketTypeId" || tickethistory.PropertyName == "TicketPriorityId" || tickethistory.PropertyName == "AssignedToUserId")
+                                            {
+                                                var oldvalue = HistoryHelper.ConvertToName(tickethistory.PropertyName, tickethistory.OldValue);
+                                                var newvalue = HistoryHelper.ConvertToName(tickethistory.PropertyName, tickethistory.NewValue);
+
+                                                <p>
+                                                    <muted>@tickethistory.Changed</muted>
+                                                    <br />
+                                                    @*<a href="#">Paul Rudd</a> purchased an item.<br />*@
+
+
+                                                    @tickethistory.PropertyName changed from @oldvalue to @newvalue
+
+
+                                                </p>
+                                            }
+                                            else
+                                            {
+                                                <p>
+                                                    <muted>@tickethistory.Changed</muted>
+                                                    <br />
+                                                    @*<a href="#">Paul Rudd</a> purchased an item.<br />*@
+
+
+                                                    @tickethistory.PropertyName changed from @tickethistory.OldValue to @tickethistory.NewValue
+
+
+                                                </p>
+                                            }
                                         </div>
                                     </div>
                                 }
@@ -199,35 +229,25 @@
                                                     <div class="form-panel">
                                                         @*<form action="#" class="form-horizontal style-form">*@
 
-
                                                         <div class="form-group">
-                                                            <input name="file" type="file" class="form-control" id="fileUpload" />
 
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="text" name="attachmentDescription"/>
-
-                                                        </div>
-                                                        <div class="form-group">
-                                                            
-                                                            <button type="submit">Submit</button>
-                                                        </div>
-
-                                                        @*<div class="form-group">
-                                                            <label class="control-label col-md-3">Without input</label>
                                                             <div class="controls col-md-9">
                                                                 <div class="fileupload fileupload-new" data-provides="fileupload">
                                                                     <span class="btn btn-theme02 btn-file">
-                                                                        <span class="fileupload-new"><i class="fa fa-paperclip"></i> Select file</span>
-                                                                        <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
-                                                                        <input type="file" class="default"/>
+                                                                        <span class="fileupload-new"><i class="fa fa-paperclip"></i> select file</span>
+                                                                        <span class="fileupload-exists"><i class="fa fa-undo"></i> change</span>
+                                                                        <input type="file" name="file" class="default" />
                                                                     </span>
                                                                     <span class="fileupload-preview" style="margin-left:5px;"></span>
                                                                     <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
-                                                                    <button type="submit" class="btn btn-theme">Submit</button>
+                                                                    <button type="submit" class="btn btn-theme">submit</button>
                                                                 </div>
                                                             </div>
-                                                        </div>*@
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="text" name="attachmentDescription" />
+
+                                                        </div>
 
                                                         @*</form>*@
                                                     </div>
@@ -253,6 +273,16 @@
             </div>
         </section>
     </section>
+    <script src="~/Scripts/bootstrap-fileupload.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/daterangepicker.js"></script>
+    <script src="~/Scripts/date.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script src="~/Scripts/daterangepicker.js"></script>
+    <script src="~/Scripts/bootstrap-timepicker.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/advanced-form-components.js"></script>
+
 </body>
 
 </html>

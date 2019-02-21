@@ -1,6 +1,8 @@
 ﻿@using bugtracker.Models
+@using bugtracker.Helpers
 
-@model IEnumerable<TicketHistory>
+
+
 
 
 
@@ -198,25 +200,50 @@
                 <!-- RECENT ACTIVITIES SECTION -->
                 <h4 class="centered mt">RECENT ACTIVITY</h4>
 
-                    @foreach (var tickethistory in Model.OrderByDescending(m => m.Changed))
+                @*<div class="row">
+                    @foreach (var tickethistory in Model.TicketHistories.OrderByDescending(m => m.Changed))
                     {
-                           <!-- First Activity -->
+                        
                         <div class="desc">
                             <div class="thumb">
                                 <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
                             </div>
                             <div class="details">
-                                <p>
-                                    <muted>@tickethistory.Changed</muted>
-                                    <br />
-                                    @*<a href="#">Paul Rudd</a> purchased an item.<br />*@
-                                    @tickethistory.PropertyName changed from @tickethistory.OldValue to @tickethistory.NewValue
-                                </p>
+                                @if (tickethistory.PropertyName == "TicketStatusId" || tickethistory.PropertyName == "TicketTypeId" || tickethistory.PropertyName == "TicketPriorityId" || tickethistory.PropertyName == "AssignedToUserId")
+                                {
+                                    var oldvalue = HistoryHelper.ConvertToName(tickethistory.PropertyName, tickethistory.OldValue);
+                                    var newvalue = HistoryHelper.ConvertToName(tickethistory.PropertyName, tickethistory.NewValue);
+
+                                    <p>
+                                        <muted>@tickethistory.Changed</muted>
+                                        <br />
+                                       
+
+
+                                        @tickethistory.PropertyName changed from @oldvalue to @newvalue
+
+
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p>
+                                        <muted>@tickethistory.Changed</muted>
+                                        <br />
+                                       
+
+
+                                        @tickethistory.PropertyName changed from @tickethistory.OldValue to @tickethistory.NewValue
+
+
+                                    </p>
+                                }
                             </div>
                         </div>
                     }
 
-                   
+                </div>*@
+
 
                 <!-- CALENDAR-->
                 <div id="calendar" class="mb">

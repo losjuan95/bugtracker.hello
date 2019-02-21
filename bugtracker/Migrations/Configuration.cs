@@ -87,8 +87,8 @@ namespace bugtracker.Migrations
                 {
                     UserName = "DemoAdmin@Mailinator.com",
                     Email = "DemoAdmin@Mailinator.com",
-                    FirstName = "Demo",
-                    LastName = "Admin"
+                    FirstName = "Admin",
+                    LastName = "Demo"
 
 
                 }, "Abc&123!");
@@ -105,8 +105,8 @@ namespace bugtracker.Migrations
                 {
                     UserName = "DemoSub@Mailinator.com",
                     Email = "DemoSub@Mailinator.com",
-                    FirstName = "Demo",
-                    LastName = "Sub"
+                    FirstName = "Submitter",
+                    LastName = "Demo"
 
 
                 }, "Abc&123!");
@@ -122,8 +122,8 @@ namespace bugtracker.Migrations
                 {
                     UserName = "DemoPM@Mailinator.com",
                     Email = "DemoPM@Mailinator.com",
-                    FirstName = "Demo",
-                    LastName = "PM"
+                    FirstName = "Project Manager",
+                    LastName = "Demo"
 
 
                 }, "Abc&123!");
@@ -140,8 +140,8 @@ namespace bugtracker.Migrations
                 {
                     UserName = "DemoDevs@Mailinator.com",
                     Email = "DemoDevs@Mailinator.com",
-                    FirstName = "Demo",
-                    LastName = "Devs"
+                    FirstName = "Developer",
+                    LastName = "Demo"
 
 
                 }, "Abc&123!");
