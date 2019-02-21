@@ -228,7 +228,7 @@ namespace bugtracker.Controllers
         }
 
         //
-        // GET: /Account/ForgotPassword
+        // GET: /Account/CustomForgotPassword
         [AllowAnonymous]
         public ActionResult CustomForgotPassword()
         {

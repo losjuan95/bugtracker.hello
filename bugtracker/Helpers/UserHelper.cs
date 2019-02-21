@@ -16,6 +16,11 @@ namespace bugtracker.Helpers
                 var userId = HttpContext.Current.User.Identity.GetUserId();
                 return db.Users.Find(userId).FirstName;
             }
+        public static string GetEmail()
+        {
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            return db.Users.Find(userId).Email;
         }
+    }
     
 }
