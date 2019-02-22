@@ -94,7 +94,7 @@ namespace bugtracker.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return View(model);
+                    return View("CustomLogin", model);
                 }
                 result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             }
@@ -270,7 +270,7 @@ namespace bugtracker.Controllers
                 var emailService = new PersonalEmail();
                 await emailService.SendAsync(message);
 
-                return View("ForgotPasswordConfirmation");
+                return View("CustomLogin");
             }
 
             // If we got this far, something failed, redisplay form
@@ -381,7 +381,7 @@ namespace bugtracker.Controllers
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("CustomLogin");
             }
 
             // Sign in the user with this external login provider if the user already has a login

@@ -1,7 +1,9 @@
 ﻿@model bugtracker.Models.Project
-
+@using bugtracker.Helpers
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Details";
+    var projhelper = new ProjectHelpers();
 }
 
 <section id="main-content">
@@ -9,6 +11,7 @@
         <h3><i class="fa fa-angle-right"></i> Blank Page</h3>
         <div class="row mt">
             <div class="col-lg-12">
+
                 <div>
                     <h4>Project</h4>
                     <hr />
@@ -31,7 +34,82 @@
 
                     </dl>
                 </div>
+                
+                <div class="content-panel">
+                    <table class="table table-striped table-advance table-hover mytable jq-data" >
+                        <h4><i class="fa fa-angle-right"></i>Tickets assigned to this project</h4>
+                        <hr>
+                        <thead>
+                            <tr>
+                                <th clasas="hidden-phone">Title</th>
+                                <th class="hidden-phone">AssignedUserID</th>
+                                <th class="hidden-phone">OwnerUserId</th>
+
+                                <th class="hidden-phone">Description</th>
+                                <th class="hidden-phone">ProjectId</th>
+                                <th class="hidden-phone">Created</th>
+                                <th class="hidden-phone">TicketTypeId</th>
+                                <th class="hidden-phone">TicketPriorityId</th>
+                                <th class="hidden-phone">TicketStatusId</th>
+
+                                <th></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var ticket in Model.Tickets.OrderBy(t => t.Created))
+                            {
+                            <tr>
+                                <td>
+                                    <a>@ticket.Title</a>
+                                </td>
+                                <td class="hidden-phone">
+                                    @if (ticket.AssignedToUserId != null)
+                                    {
+                                        @ticket.AssignedToUser.FirstName
+                                    }
+                                    else
+                                    {
+                                        <span>Unassigned</span>
+                                    }
+                                </td>
+                                <td class="hidden-phone">@ticket.OwnerUser.FirstName</td>
+
+                                <td class="hidden-phone">@ticket.Description</td>
+                                <td class="hidden-phone">@ticket.Project.Name</td>
+                                <td class="hidden-phone">@ticket.Created</td>
+                                <td class="hidden-phone">@ticket.TicketType.Name</td>
+                                <td class="hidden-phone">@ticket.TicketPriority.Name</td>
+                                <td><span class="label label-info label-mini">@ticket.TicketStatus.Name</span></td>
+
+
+                                <td>
+                                    @if (User.IsInRole("Admin") || User.IsInRole("PM") || ticket.OwnerUserId == HttpContext.Current.User.Identity.GetUserId() || ticket.AssignedToUserId == HttpContext.Current.User.Identity.GetUserId())
+                                    {
+                                        <a href="@Url.Action("Edit", new { id = Model.Id})" class="btn btn-success btn-xs"><i class="fa fa-check"></i></a>
+                                        <a href="@Url.Action("Details", new { id = Model.Id})" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+
+                                    }
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a href="@Url.Action("Delete", new { id = Model.Id})" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
+
+                                    }
+                                </td>
+
+
+                            </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
                 <p>
+                    @if (User.IsInRole("Sub") && projhelper.IsUserOnProject(HttpContext.Current.User.Identity.GetUserId(), Model.Id))
+                    {
+                        @Html.ActionLink("Create New Ticket", "Create", "Tickets", new { Id = Model.Id }, null)
+                    }
+
                     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
                     @Html.ActionLink("Back to List", "Index")
                 </p>

@@ -252,10 +252,7 @@
     <Content Include="img\core icon.jpg" />
     <Content Include="img\defaultavatar.png" />
     <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="img\demoyay.jpeg" />
     <Content Include="img\silhoutte2.jpg" />
     <Content Include="img\silhoutte3.jpg" />
@@ -340,15 +337,6 @@
     <Content Include="Views\TicketAttachments\Details.cshtml" />
     <Content Include="Views\TicketAttachments\Edit.cshtml" />
     <Content Include="Views\TicketAttachments\Index.cshtml" />
-    <Content Include="Views\TicketComments\Delete.cshtml" />
-    <Content Include="Views\TicketComments\Details.cshtml" />
-    <Content Include="Views\TicketComments\Edit.cshtml" />
-    <Content Include="Views\TicketComments\Index.cshtml" />
-    <Content Include="Views\TicketHistories\Create.cshtml" />
-    <Content Include="Views\TicketHistories\Delete.cshtml" />
-    <Content Include="Views\TicketHistories\Details.cshtml" />
-    <Content Include="Views\TicketHistories\Edit.cshtml" />
-    <Content Include="Views\TicketHistories\Index.cshtml" />
     <Content Include="Views\TicketNotifications\Create.cshtml" />
     <Content Include="Views\TicketNotifications\Delete.cshtml" />
     <Content Include="Views\TicketNotifications\Index.cshtml" />
@@ -367,7 +355,6 @@
     <Content Include="Views\TicketTypes\Details.cshtml" />
     <Content Include="Views\TicketTypes\Edit.cshtml" />
     <Content Include="Views\TicketTypes\Index.cshtml" />
-    <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Projects\Charts.cshtml" />
     <Content Include="Views\Projects\Tables.cshtml" />
     <Content Include="Views\Account\CustomRegister.cshtml" />

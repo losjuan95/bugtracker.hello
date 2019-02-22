@@ -24,7 +24,8 @@ namespace bugtracker.Migrations
             context.TicketStatuses.AddOrUpdate(m => m.Name,
                 new TicketStatus() { Name = "Open" },
                 new TicketStatus() { Name = "Closed" },
-                new TicketStatus() { Name = "On-Hold" }
+                new TicketStatus() { Name = "On-Hold" },
+                new TicketStatus() { Name = "Un-Assigned"}
 
                 );
             context.TicketPriorities.AddOrUpdate(m => m.Name,

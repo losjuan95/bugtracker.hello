@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using bugtracker.Helpers;
 using bugtracker.Models;
-
+using Microsoft.AspNet.Identity;
 
 namespace bugtracker.Controllers
 {
@@ -42,6 +42,13 @@ namespace bugtracker.Controllers
         [Authorize(Roles ="Admin, PM")]
         public ActionResult Create()
         {
+            var devs = roleHelpers.UsersInRole("Devs");
+            var subs = roleHelpers.UsersInRole("Sub");
+            var pms = roleHelpers.UsersInRole("PM");
+
+            ViewBag.ProjManager = new SelectList(pms, "Id", "Email");
+            ViewBag.Developers = new MultiSelectList(devs, "Id", "Email");
+            ViewBag.Submitters = new MultiSelectList(subs, "Id", "Email");
             return View();
         }
 
@@ -50,12 +57,44 @@ namespace bugtracker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description")] Project project)
+        public ActionResult Create([Bind(Include = "Id,Name,Description")] Project project, List<string> Developers, List<string> Submitters, string ProjManager)
         {
             if (ModelState.IsValid)
             {
+
+               
                 db.Projects.Add(project);
                 db.SaveChanges();
+                if (User.IsInRole("PM"))
+                {
+                    projecthelper.AddUserToProject(User.Identity.GetUserId(), project.Id);
+                }
+              
+                else
+                {
+                    if (string.IsNullOrEmpty(ProjManager))
+                    {
+                        projecthelper.AddUserToProject(ProjManager, project.Id);
+
+                    }
+                }
+             
+                if(Developers != null)
+                {
+                    foreach (var dev in Developers)
+                    {
+                        projecthelper.AddUserToProject(dev, project.Id);
+
+                    }
+                }
+                if(Submitters != null)
+                {
+                    foreach (var sub in Submitters)
+                    {
+                        projecthelper.AddUserToProject(sub, project.Id);
+                    }
+
+                }
                 return RedirectToAction("Index");
             }
 

@@ -75,15 +75,33 @@ namespace bugtracker.Controllers
 
         // GET: Tickets/Create
         [Authorize(Roles ="Admin, Sub")]
-        public ActionResult Create()
+        public ActionResult Create(int? Id)
         {
+            var userprojects = Projecthelper.ListUserProjects(User.Identity.GetUserId());
             ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FirstName");
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName");
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
+            if(Id == null)
+            {
+                ViewBag.ProjectId = new SelectList(userprojects, "Id", "Name");
+
+            }
+            else
+            {
+                ViewBag.ProjectId = new SelectList(userprojects, "Id", "Name", Id);
+
+            }
             ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name");
             ViewBag.TicketStatusId= new SelectList(db.TicketStatuses, "Id", "Name");
             ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Name");
-            return View();
+
+            var ticket = new Ticket
+            {
+                TicketTypeId = db.TicketTypes.FirstOrDefault(t => t.Name == "Bug").Id,
+                TicketPriorityId = db.TicketPriorities.FirstOrDefault(p => p.Name == "Low").Id,
+                TicketStatusId = db.TicketStatuses.FirstOrDefault(s => s.Name == "Un-Assigned").Id
+            };
+
+            return View(ticket);
         }
 
         // POST: Tickets/Create
@@ -91,10 +109,12 @@ namespace bugtracker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ProjectId,Title,Description,Created,Updated,TicketTypeId,TicketPriorityId,TicketStatusId,OwnerUserId,AssignedToUserId")] Ticket ticket)
+        public ActionResult Create( Ticket ticket)
         {
             if (ModelState.IsValid)
             {
+                ticket.OwnerUserId = User.Identity.GetUserId();
+                ticket.Created = DateTime.Now;
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
                 return RedirectToAction("Index");

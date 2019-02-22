@@ -49,27 +49,27 @@
             <div class="sidebar-toggle-box">
                 <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
             </div>
-           
-            @Html.ActionLink("BugTracker","Index","Home", new { @class="logo"})
-        
+
+            @Html.ActionLink("BugTracker", "Index", "Home", new { @class = "logo" })
+
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
                 <ul class="nav top-menu">
-                    
+
                     <!-- notification dropdown start-->
                     <li id="header_notification_bar" class="dropdown">
                         <a href="@Url.Action("MyIndex", "TicketNotifications", new { @class="data-toggle dropdown-toggle fa fa-bell-o"})">
-                           <i class="fa fa-bell-o"></i>
+                            <i class="fa fa-bell-o"></i>
                             <span class="badge bg-warning"></span>
                         </a>
-                        <ul class="dropdown-menu extended notification">                         
+                        <ul class="dropdown-menu extended notification">
                             <li>
                                 <p class="yellow"></p>
                             </li>
-                            
+
                             <li>
-                               
+
                             </li>
                         </ul>
                     </li>
@@ -83,7 +83,7 @@
                 </ul>
             </div>
         </header>
-       
+
 
         <!--header end-->
         <!-- **********************************************************************************************************************************************************
@@ -110,40 +110,43 @@
 
                         </li>
                     }
-
-                    <li class="sub-menu">
-                        <a href="@Url.Action("Index","Projects")">
-                            <i class="fa fa-desktop"></i>
-                            <span>Projects</span>
-                        </a>
-                        
-                    </li>
-                    <li class="sub-menu">
-                        <a href="@Url.Action("Index","Tickets")">
-                            <i class="fa fa-cogs"></i>
-                            <span>Tickets</span>
-                        </a>
-                        
-                    </li>
-
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.IsInRole("Admin") || User.IsInRole("PM") || User.IsInRole("Sub") || User.IsInRole("Devs"))
                     {
                         <li class="sub-menu">
-                            <a href="@Url.Action("MyIndex", "TicketNotifications")">
+                            <a href="@Url.Action("Index","Projects")">
                                 <i class="fa fa-desktop"></i>
-                                <span>Ticket Notifications</span>
+                                <span>Projects</span>
                             </a>
+
                         </li>
-                    }
-                    @if (User.IsInRole("Admin"))
-                    {
                         <li class="sub-menu">
-                            <a href="@Url.Action("AssignRole","Admin")">
-                                <i class="fa fa-desktop"></i>
-                                <span>Users</span>
+                            <a href="@Url.Action("Index","Tickets")">
+                                <i class="fa fa-cogs"></i>
+                                <span>Tickets</span>
                             </a>
-                          
+
                         </li>
+
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="sub-menu">
+                                <a href="@Url.Action("MyIndex", "TicketNotifications")">
+                                    <i class="fa fa-desktop"></i>
+                                    <span>Ticket Notifications</span>
+                                </a>
+                            </li>
+                        }
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li class="sub-menu">
+                                <a href="@Url.Action("AssignRole","Admin")">
+                                    <i class="fa fa-desktop"></i>
+                                    <span>Users</span>
+                                </a>
+
+                            </li>
+                        }
+
                     }
 
 
@@ -169,7 +172,7 @@
                 <p>
                     &copy; Copyrights <strong>BugTracker<strong>.All Rights Reserved
                 </p>
-               
+
 
 
                 <a href="">
@@ -188,7 +191,7 @@
     <script src="~/Scripts/jquery.scrollTo.min.js"></script>
     <script src="~/Scripts/jquery.nicescroll.js"></script>
     <script src="~/Scripts/jquery.sparkline.js"></script>
-    <!--common script for all pages-->
+    <!--common script for all pages-->  
     <script src="~/Scripts/common-scripts.js"></script>
     <script src="~/Scripts/jquery.gritter.js"></script>
     <script src="~/Scripts/gritter-conf.js"></script>
@@ -219,7 +222,7 @@
               return false;
             });
         </script>*@
-        @*<script type="application/javascript">
+    @*<script type="application/javascript">
             $(document).ready(function() {
               $("#date-popover").popover({
                 html: true,
@@ -261,13 +264,13 @@
               console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
             }
         </script>*@
+    <script>
+        $(document).ready(function () {
+            $('.jq-data').DataTable();
+        });
+    </script>
 </body>
 
 </html>
 
 
-<script>
-    $(document).ready(function () {
-        $('#jq-data').DataTable();
-    });
-</script>
