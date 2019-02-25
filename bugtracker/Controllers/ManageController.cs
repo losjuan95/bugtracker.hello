@@ -7,14 +7,18 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using bugtracker.Models;
+using bugtracker.Helpers;
+using System.IO;
 
 namespace bugtracker.Controllers
 {
+    
     [Authorize]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -52,7 +56,8 @@ namespace bugtracker.Controllers
 
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+      
+        public ActionResult Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
@@ -64,17 +69,37 @@ namespace bugtracker.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
-            {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-            };
-            return View(model);
-        }
+            var user = db.Users.Find(userId);
+            //var model = new IndexViewModel
 
+            //{
+            //    HasPassword = HasPassword(),
+            //    PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+            //    TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+            //    Logins = await UserManager.GetLoginsAsync(userId),
+            //    BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+            //};
+            return View(user);
+        }
+        //post
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+         public ActionResult ChangeName(string firstName, string lastName)
+        {
+            var userid = User.Identity.GetUserId();
+            var user = db.Users.Find(userid);
+            user.FirstName = firstName;
+            user.LastName = lastName;
+
+            db.Users.Attach(user);
+            db.Entry(user).Property(u => u.FirstName).IsModified = true;
+            db.Entry(user).Property(u => u.FirstName).IsModified = true;
+
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+        
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]

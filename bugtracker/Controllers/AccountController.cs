@@ -110,7 +110,7 @@ namespace bugtracker.Controllers
                     //If the return Url is empty we can send the user anywhere we want to after they login
                     //If the return Url is NOT empty, that means they tried getting to a view and were kicked out and need to be redirected after logging in
                     if (string.IsNullOrEmpty(returnUrl))
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Manage");
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

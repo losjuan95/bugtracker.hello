@@ -37,3 +37,9 @@
     button:hover, a:hover {
         opacity: 0.7;
     }
+
+    .avatar{
+        max-height: 100px;
+        max-width: 100px;
+        
+    }

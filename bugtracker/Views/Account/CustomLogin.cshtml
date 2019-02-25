@@ -58,7 +58,7 @@
                         @Html.PasswordFor(m => m.Password, new { placeholder = "Password", @class = "form-control" })
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="col-md-5">
                         <label class="checkbox">
                             <input type="checkbox" value="remember-me"> Remember me
 
@@ -120,11 +120,14 @@
     <!--BACKSTRETCH-->
     <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
 
-    <script type="text/javascript" src="~/Scripts/jquery.backstretch.min.js"></script>
-
-
-
-
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.3/jquery.backstretch.min.js"></script>
+    <script>
+        $("body").backstretch([
+            "../img/adminback.jpeg"
+            , "../img/crate.jpeg"
+            , "../img/lapy.jpeg"
+        ], { duration: 3000, fade: 750 });
+    </script>
 </body>
 
 </html>

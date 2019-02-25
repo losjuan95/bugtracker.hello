@@ -11,12 +11,13 @@
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <title>Dashio - Bootstrap Admin Template</title>
+    <title>CoreTracker</title>
 
     <!-- Favicons -->
 
     <link href="~/img/core icon.jpg" rel="icon" />
-
+    @*for the boxes*@
+    <link href="~/Content/firstpage.css" rel="stylesheet" />
 
     <!-- Bootstrap core CSS -->
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
@@ -34,21 +35,16 @@
       License: https://templatemag.com/license/
     ======================================================= -->
 </head>
-<section style="background: url(../../img/adminback.jpeg); background-size: cover; background-position: center center" class="hero">
-    <div class="container">
-        
-        
-    </div>
-</section>
+
 <body>
     <!--main content start-->
     <section>
-        <section>
+     
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12 quote">
                     <!-- end col-4 -->
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="custom-box">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 quote">
+                        <div class="custom-box quote caja1">
                             <div class="servicetitle">
                                 <h4>Login</h4>
                                 <hr>
@@ -56,6 +52,8 @@
                             <div class="icn-main-container">
                                 <img class="img-circle" src="~/img/avatarimg1.jpg" width="220" />
                             </div>
+                            <br />
+                            
                             <p>Log In and Lets Get Started</p>
                             <ul class="pricing">
                                 <li>Already a User?</li>
@@ -64,17 +62,19 @@
                             </ul>
                             @Html.ActionLink("Login", "CustomLogin", "Account", null, new { @class = "btn btn-theme" })
                         </div>
+
                         <!-- end custombox -->
                     </div>
+
                     <!-- end col-4 -->
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="custom-box">
+                        <div class="custom-box caja1">
                             <div class="servicetitle">
                                 <h4>Register</h4>
                                 <hr>
                             </div>
                             <div class="icn-main-container">
-                                <img class="img-circle" src="~/img/avatarimg4.jpg" width="200" />
+                                <img class="img-circle" src="~/img/avatarimg4.jpg" width="195" />
                             </div>
                             <p>New User? Register Here!</p>
                             <ul class="pricing">
@@ -86,17 +86,18 @@
                         </div>
                         <!-- end custombox -->
                     </div>
-
+                    
                     <!-- end col-4 -->
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="custom-box">
+                        <div class="custom-box caja1">
                             <div class="servicetitle">
                                 <h4>Guest</h4>
                                 <hr>
                             </div>
                             <div class="icn-main-container">
-                                <img class="img-circle" src="~/img/avatarimg2.jpg" width="260" />
+                                <img class="img-circle" src="~/img/avatarimg2.jpg" width="255" />
                             </div>
+                            <br />
                             <p>Log in as Guest and you can select one of the four roles used in the BugTracker Application</p>
                             <ul class="pricing">
                                 <li>Not a User?</li>
@@ -112,7 +113,7 @@
                 <!--  /col-lg-12 -->
             </div>
             <!--  /row -->
-        </section>
+       
         <!-- /wrapper -->
     </section>
     <!-- /MAIN CONTENT -->
@@ -122,6 +123,7 @@
         @Scripts.Render("~/bundles/jqueryval")
         <script src="~/Scripts/jquery.min.js"></script>
         <script src="~/Scripts/bootstrap.min.js"></script>
+      
     }
 </body>
 

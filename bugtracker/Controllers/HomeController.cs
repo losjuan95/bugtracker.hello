@@ -1,7 +1,10 @@
-﻿using bugtracker.Models;
+﻿using bugtracker.Helpers;
+using bugtracker.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -34,6 +37,33 @@ namespace bugtracker.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeAvatar(HttpPostedFileBase image)
+        {
+
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.Find(userId);
+            if (FileUploadValidator.AvatarUploadValidator(image))
+            {
+
+                var imageName = Path.GetFileName(image.FileName);
+                image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), imageName));
+                user.AvatarPath = "/Uploads/" + imageName;
+                db.Users.Attach(user);
+                db.Entry(user).Property(u => u.AvatarPath).IsModified = true;
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Manage");
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Manage");
+            }
+
+
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]

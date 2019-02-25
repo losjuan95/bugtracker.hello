@@ -228,6 +228,7 @@
     <Content Include="Content\Chart.js" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\daterangepicker.css" />
+    <Content Include="Content\firstpage.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\jquery.gritter.css" />
@@ -250,10 +251,12 @@
     <Content Include="img\avatarimg3.jpg" />
     <Content Include="img\avatarimg4.jpg" />
     <Content Include="img\core icon.jpg" />
+    <Content Include="img\crate.jpeg" />
     <Content Include="img\defaultavatar.png" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="img\demoyay.jpeg" />
+    <Content Include="img\lapy.jpeg" />
     <Content Include="img\silhoutte2.jpg" />
     <Content Include="img\silhoutte3.jpg" />
     <Content Include="img\silhoutte4.jpg" />
@@ -264,6 +267,9 @@
     <Content Include="private.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
     <None Include="Properties\PublishProfiles\coreTracker - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\coreTracker - Web Deploy.pubxml" />
     <Content Include="Scripts\advanced-form-components.js" />
@@ -277,7 +283,6 @@
     <Content Include="Scripts\date.js" />
     <Content Include="Scripts\daterangepicker.js" />
     <Content Include="Scripts\gritter-conf.js" />
-    <Content Include="Scripts\jquery.backstretch.min.js" />
     <Content Include="Scripts\jquery.dcjqaccordion.2.7.js" />
     <Content Include="Scripts\jquery.gritter.js" />
     <Content Include="Scripts\jquery.js" />
@@ -288,6 +293,15 @@
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\sparkline-chart.js" />
     <Content Include="Scripts\zabuto_calendar.js" />
+    <Content Include="Uploads\adminback.jpeg" />
+    <Content Include="Uploads\avatarimg4.jpg" />
+    <Content Include="Uploads\blknwhite.jpeg" />
+    <Content Include="Uploads\fancy.jpeg" />
+    <Content Include="Uploads\jason twichell.jpg" />
+    <Content Include="Uploads\jayson twichell.jpg" />
+    <Content Include="Uploads\joshbosh.jpg" />
+    <Content Include="Uploads\Landon-Wyatt-_2018.jpg" />
+    <Content Include="Uploads\sanders.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -301,7 +315,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -366,7 +379,6 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Admin\AssignProjectUsers.cshtml" />
     <Content Include="Views\Account\DemoIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>

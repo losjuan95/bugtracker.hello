@@ -1,4 +1,11 @@
-﻿@using bugtracker.Helpers
+﻿@using bugtracker.Models
+@using bugtracker.Helpers
+@using Microsoft.AspNet.Identity
+@{ 
+    var db = new ApplicationDbContext();
+    var userid = HttpContext.Current.User.Identity.GetUserId();
+    var user = db.Users.Find(userid);
+}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,11 +32,14 @@
     <!-- Custom styles for this template -->
     <link href="~/Content/style.css" rel="stylesheet" />
     <link href="~/Content/style-responsive.css" rel="stylesheet" />
+    <link href="~/custom Css/profile.css" rel="stylesheet" />
     <script src="~/Content/Chart.js"></script>
     @*cdn for datatables*@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css" />
 
-   
+    @*<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css" />
+               <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.semanticui.min.css" />
+        <link rel="stylesheet" type="text/css" href=" https://cdn.datatables.net/buttons/1.5.4/css/buttons.semanticui.min.css" />*@
     <!-- =======================================================
       Template Name: Dashio
       Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
@@ -49,8 +59,8 @@
             <div class="sidebar-toggle-box">
                 <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
             </div>
-
-            @Html.ActionLink("BugTracker", "Index", "Home", new { @class = "logo" })
+            
+            @Html.ActionLink("bugtracker", "index", "Manage", null, new { @class = "logo" })
 
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
@@ -59,18 +69,16 @@
 
                     <!-- notification dropdown start-->
                     <li id="header_notification_bar" class="dropdown">
-                        <a href="@Url.Action("MyIndex", "TicketNotifications", new { @class="data-toggle dropdown-toggle fa fa-bell-o"})">
+                        <a href="@Url.Action("MyIndex", "TicketNotifications")">
                             <i class="fa fa-bell-o"></i>
                             <span class="badge bg-warning"></span>
                         </a>
                         <ul class="dropdown-menu extended notification">
+
                             <li>
                                 <p class="yellow"></p>
                             </li>
 
-                            <li>
-
-                            </li>
                         </ul>
                     </li>
                     <!-- notification dropdown end -->
@@ -94,8 +102,8 @@
             <div id="sidebar" class="nav-collapse ">
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
-
-                    <h5 class="centered">@UserHelper.GetFirstName()</h5>
+                    <p class="centered"><img src="@user.AvatarPath" class="img-circle" width="80"></p>
+                    <h5 class="centered">@user.FirstName</h5>
                     <li>
 
                         <a href="@Url.Action("Index","Manage")">
@@ -103,25 +111,30 @@
                             <span>My Profile</span>
                         </a>
                     </li>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li>
-                            @Html.ActionLink("DashBoard", "Index", "Home", new { @class = "fa fa-dashboard active" })
+                    @*@if (User.Identity.IsAuthenticated)
+        {
 
-                        </li>
-                    }
+            <li class="sub-menu">
+                <a href="@Url.Action("Index","Home")">
+                    <i class="fa fa-dashboard"></i>
+                    <span>Dashboard</span>
+                </a>
+
+            </li>
+        }*@
                     @if (User.IsInRole("Admin") || User.IsInRole("PM") || User.IsInRole("Sub") || User.IsInRole("Devs"))
                     {
+
                         <li class="sub-menu">
                             <a href="@Url.Action("Index","Projects")">
-                                <i class="fa fa-desktop"></i>
+                                <i class="fa fa-product-hunt"></i>
                                 <span>Projects</span>
                             </a>
 
                         </li>
                         <li class="sub-menu">
                             <a href="@Url.Action("Index","Tickets")">
-                                <i class="fa fa-cogs"></i>
+                                <i class="fa fa-ticket"></i>
                                 <span>Tickets</span>
                             </a>
 
@@ -131,7 +144,7 @@
                         {
                             <li class="sub-menu">
                                 <a href="@Url.Action("MyIndex", "TicketNotifications")">
-                                    <i class="fa fa-desktop"></i>
+                                    <i class="fa fa-sticky-note"></i>
                                     <span>Ticket Notifications</span>
                                 </a>
                             </li>
@@ -170,7 +183,7 @@
         <footer class="site-footer">
             <div class="text-center">
                 <p>
-                    &copy; Copyrights <strong>BugTracker<strong>.All Rights Reserved
+                    &copy; Copyrights <strong>BugTracker</strong>.All Rights Reserved
                 </p>
 
 
@@ -191,7 +204,7 @@
     <script src="~/Scripts/jquery.scrollTo.min.js"></script>
     <script src="~/Scripts/jquery.nicescroll.js"></script>
     <script src="~/Scripts/jquery.sparkline.js"></script>
-    <!--common script for all pages-->  
+    <!--common script for all pages-->
     <script src="~/Scripts/common-scripts.js"></script>
     <script src="~/Scripts/jquery.gritter.js"></script>
     <script src="~/Scripts/gritter-conf.js"></script>
@@ -199,10 +212,10 @@
     <script src="~/Scripts/sparkline-chart.js"></script>
     <script src="~/Scripts/zabuto_calendar.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
-    @RenderSection("scripts", false)
-
-
-    @*<script type="text/javascript">
+    @*<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>*@
+            @RenderSection("scripts", false)
+            @*<script type="text/javascript">
             $(document).ready(function() {
               var unique_id = $.gritter.add({
                 // (string | mandatory) the heading of the notification

@@ -37,67 +37,74 @@
 </head>
 <body class="bg-dark">
     <div class="container">
-       
-            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-login", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h2 class="form-login-heading">Create an Account</h2>
-                <div class="login-wrap">
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-md-6">
-                                <div class="form-label-group">
-                                    <input type="text" Name="FirstName" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-label-group">
-                                    <input type="text" Name="LastName" id="lastName" class="form-control" placeholder="Last name" required="required">
 
-                                </div>
-                            </div>
-                        </div>
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-login", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <h2 class="form-login-heading">Create an Account</h2>
+            <div class="login-wrap">
+                <div class="form-group">
+                  
+                                @Html.TextBoxFor(m => m.FirstName, new { placeholder = "First Name", @class = "form-control" })
+                       
+                </div>
+                
+                <br />
+               
+                <div class="form-group">
+                        
+                        @Html.TextBoxFor(m => m.LastName, new { placeholder = "Last Name", @class = "form-control" })
 
-                    </div>
-                    <br />
-                    <br />
-                    <div class="form-group">
-                        @Html.TextBoxFor(m => m.Email, new { placeholder = "Email", @class = "form-control" })
+                        
+                </div>
 
-                    </div>
-                    <br />
-                    <div class="form-group">
-                        @Html.PasswordFor(m => m.Password, new { placeholder = "Password", @class = "form-control" })
-                    </div>
-                    <br />
-                    <div class="form-group">
-                        @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirm Password", @class = "form-control" })
-                    </div>
-
-                    <span class="pull-left">
-                        @Html.ActionLink("Landing Page", "FirstPage", "Account")
-                    </span>
-                    <span class="pull-right">
-                        <div class="text-center">
-                            @Html.ActionLink("Login Page", "CustomLogin", "Account", null)
-                            <br />
-                            @Html.ActionLink("Forgot Password", "CustomForgotPassword", "Account", null)
-                        </div>
-                    </span>
-                    <br />
-                    <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> Register</button>
-
-
+                <br />
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Email, new { placeholder = "Email", @class = "form-control" })
 
                 </div>
-                }
+                <br />
+                <div class="form-group">
+                    @Html.PasswordFor(m => m.Password, new { placeholder = "Password", @class = "form-control" })
+                </div>
+                <br />
+                <div class="form-group">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirm Password", @class = "form-control" })
+                </div>
 
-               
+                <span class="pull-left">
+                    @Html.ActionLink("Landing Page", "FirstPage", "Account")
+                </span>
+                <span class="pull-right">
+                    <div class="text-center">
+                        @Html.ActionLink("Login Page", "CustomLogin", "Account", null)
+                        <br />
+                        @Html.ActionLink("Forgot Password", "CustomForgotPassword", "Account", null)
+                    </div>
+                </span>
+                <br />
+                <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> Register</button>
+
+
+
+            </div>
+        }
+
+
     </div>
- 
+
 
     <script src="~/Scripts/jquery.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.3/jquery.backstretch.min.js"></script>
+
+    <script>
+        $("body").backstretch([
+            "../img/adminback.jpeg"
+            , "../img/crate.jpeg"
+            , "../img/lapy.jpeg"
+        ], { duration: 3000, fade: 750 });
+    </script>
 
 </body>
 </html>

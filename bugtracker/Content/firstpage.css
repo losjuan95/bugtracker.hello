@@ -1,0 +1,59 @@
+﻿.quote .caja1:hover
+{
+  box-shadow: -20px 50px 100px rgba(0,0,0,.5)
+}
+.quote .bg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0;
+    transition: 0.5s;
+    pointer-events: none;
+    width: 100%;
+    height: 100%
+}
+
+body{
+    margin: 0;
+    padding:0;
+
+}
+section{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(90deg, #3f51b5, #00bcd4);
+    animation: animate 20s linear infinite;
+}
+@keyframes animate{
+    0%{
+        filter: hue-rotate(0deg);
+    }
+    50%{
+        filter: hue-rotate(360deg);
+    }
+    100%{
+        filter: hue-rotate(0deg);
+    }
+}
+section:before{
+    content:'';
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top: 100vh solid transparent;
+    border-left: 100vh solid #fff;
+    opacity: 0.1;
+}
+section::before(2) {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-top: 100vh solid transparent;
+    border-right: 100vh solid #fff;
+    opacity: 0.1;
+}

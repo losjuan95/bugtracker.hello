@@ -85,12 +85,13 @@ namespace bugtracker.Helpers
             {
                 name = dbStatic.TicketPriorities.Find(Convert.ToInt32(Id)).Name;
             }
+            //else if you are not assigned to this ticket you can still view
             if (propertyName == "AssignedToUserId")
             {
                 name = dbStatic.Users.Find(Id).FirstName;
             }
-
-
+          
+           
             return name;
         }
 
