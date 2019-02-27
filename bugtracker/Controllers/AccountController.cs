@@ -205,7 +205,7 @@ namespace bugtracker.Controllers
  
 
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Manage");
                 }
                 AddErrors(result);
             }

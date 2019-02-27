@@ -17,10 +17,13 @@ namespace bugtracker.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         private ProjectHelpers projecthelper = new ProjectHelpers();
         private UserRolesHelpers roleHelpers = new UserRolesHelpers();
+        
         // GET: Projects
         public ActionResult Index()
         {
-            return View(db.Projects.ToList());
+            var userid = User.Identity.GetUserId();
+            var userprojects = projecthelper.ListUserProjects(userid).ToList();
+            return View(userprojects);
         }
 
         // GET: Projects/Details/5

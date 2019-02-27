@@ -47,6 +47,11 @@ namespace bugtracker.Helpers
                 ticketHistory = Createhistory("AssignedToUserId", oldTicket.AssignedToUserId, newTicket.AssignedToUserId, newTicket.Id);
                 db.TicketHistories.Add(ticketHistory);
             }
+            if (oldTicket.TicketAttachments != newTicket.TicketAttachments)
+            {
+                ticketHistory = Createhistory("TicketAttachments", oldTicket.TicketAttachments.ToString(), newTicket.TicketAttachments.ToString(), newTicket.Id);
+                db.TicketHistories.Add(ticketHistory);
+            }
             db.SaveChanges();
 
         }

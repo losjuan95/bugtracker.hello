@@ -21,9 +21,16 @@
                     <div class="col-md-4 profile-text mt mb centered">
                         <p><img src="@user.AvatarPath" class="avatar img img-circle"></p>
                         <h3>@user.FirstName</h3>
-                        <h6><i class="fa fa-briefcase"></i><span>Role:</span>  @rolehelper.ListUserRoles(currentuserId).FirstOrDefault().ToString()</h6>
-                        <br>
-                    </div>
+                        <h6>
+                            <i class="fa fa-briefcase"></i><span>Role:</span>
+                            @if(User.IsInRole("Admin")||User.IsInRole("PM")|| User.IsInRole("Sub")|| User.IsInRole("Devs"))
+                            {
+                                rolehelper.ListUserRoles(currentuserId).FirstOrDefault().ToString();
+
+                            }
+                        </h6>
+                            <br>
+                        </div>
                     <!-- /col-md-4 -->
                     <div class="col-md-4 profile-text">
                         
@@ -63,10 +70,7 @@
                                     <div class="col-md-6">
                                         <textarea rows="3" class="form-control" placeholder="Whats on your mind?"></textarea>
                                         <div class="grey-style">
-                                            <div class="pull-left">
-                                                <button class="btn btn-sm btn-theme"><i class="fa fa-camera"></i></button>
-                                                <button class="btn btn-sm btn-theme"><i class="fa fa-map-marker"></i></button>
-                                            </div>
+                                           
                                             <div class="pull-right">
                                                 <button class="btn btn-sm btn-theme03">POST</button>
                                             </div>
@@ -92,12 +96,15 @@
                                     </div>
                                     <!-- /col-md-6 -->
                                     <div class="col-md-6 detailed">
-                                        <h4>User Stats</h4>
+                                        <h4>Ticket Statuses</h4>
                                         <div class="row centered mt mb">
                                             <div class="col-sm-4">
                                                 <h1><i class="fa fa-money"></i></h1>
                                                 <h3>On-Hold</h3>
-                                                <h2>@db.Tickets.Where(t => t.TicketStatus.Name == "On-Hold").Count()</h2>
+                                                <h2>
+                                                    @db.Tickets.Where(t => t.TicketStatus.Name == "On-Hold").Count()
+                                                   
+                                                </h2>
                                             </div>
                                             <div class="col-sm-4">
                                                 <h1><i class="fa fa-trophy"></i></h1>
@@ -105,7 +112,7 @@
                                                 <h2>@db.Tickets.Where(t => t.TicketStatus.Name == "Open").Count()</h2>
                                             </div>
                                             <div class="col-sm-4">
-                                                <h1><i class="fa fa-shopping-cart"></i></h1>
+                                                <h1><i class="fa fa-window-close"></i></h1>
                                                 <h3>Closed</h3>
                                                 <h2>@db.Tickets.Where(t => t.TicketStatus.Name == "Closed").Count()</h2>
                                             </div>

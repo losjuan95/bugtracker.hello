@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
-    
+    ViewBag.Title = "Delete";
 }
 
 <!--main content start-->
@@ -55,10 +55,14 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Confirmed)
                             </td>
+
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <input type="submit" value="Delete" class="btn btn-default" /> 
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                }
                             </td>
                         </tr>
                     }

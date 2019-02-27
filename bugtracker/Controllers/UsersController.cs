@@ -11,6 +11,7 @@ using bugtracker.Models;
 
 namespace bugtracker.Controllers
 {
+    [Authorize (Roles =("Admin"))]
     public class UsersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

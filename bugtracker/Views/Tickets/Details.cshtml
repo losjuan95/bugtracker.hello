@@ -1,5 +1,6 @@
 ﻿@using bugtracker.Models
 @using bugtracker.Helpers
+@using Microsoft.AspNet.Identity
 
 @model Ticket
 
@@ -9,14 +10,19 @@
 
 @{
     ViewBag.Title = "Details";
+    var projhelper = new ProjectHelpers();
+    var rolehelper = new UserRolesHelpers();
+    var currentuserId = HttpContext.Current.User.Identity.GetUserId();
     ApplicationDbContext db = new ApplicationDbContext();
+    var user = db.Users.Find(currentuserId);
+
 }
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <link href="~/custom Css/tickdet.css" rel="stylesheet" />
 
-
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-fileupload.css" rel="stylesheet" />
     <link href="~/Content/datepicker.css" rel="stylesheet" />
     <link href="~/Content/daterangepicker.css" rel="stylesheet" />
@@ -88,6 +94,7 @@
                                                             <div class="first-part odd">@comment.User.FirstName</div>
                                                             <div class="second-part">
                                                                 @Html.Raw(comment.CommentBody)
+
                                                             </div>
                                                             <div class="third-part">@comment.Created.ToString("hh:mm")</div>
                                                         </div>
@@ -115,15 +122,16 @@
                                                     </footer>
                                                 </aside>
                                                 <aside class="right-side">
-                                                    
+
                                                     <div class="invite-row">
                                                         <h4 class="pull-left">Team Members</h4>
                                                     </div>
+
                                                     <ul class="chat-available-user">
                                                         <li>
                                                             <a href="chat_room.html">
                                                                 <img class="img-circle" src="img/friends/fr-02.jpg" width="32">
-                                                                Paul Brown
+
                                                                 <span class="text-muted">1h:02m</span>
                                                             </a>
                                                         </li>
@@ -178,7 +186,7 @@
                                             <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
                                         </div>
                                         <div class="details">
-                                            @if (tickethistory.PropertyName == "TicketStatusId" || tickethistory.PropertyName == "TicketTypeId" || tickethistory.PropertyName == "TicketPriorityId")
+                                            @if (tickethistory.PropertyName == "TicketStatusId" || tickethistory.PropertyName == "TicketTypeId" || tickethistory.PropertyName == "TicketPriorityId" || tickethistory.PropertyName == "TicketAttachments")
                                             {
                                                 var oldvalue = HistoryHelper.ConvertToName(tickethistory.PropertyName, tickethistory.OldValue);
                                                 var newvalue = HistoryHelper.ConvertToName(tickethistory.PropertyName, tickethistory.NewValue);
@@ -198,14 +206,14 @@
                                             {
 
                                                 var newvalue = HistoryHelper.ConvertToName(tickethistory.PropertyName, tickethistory.NewValue);
-                                             
+
                                                 <p>
                                                     <muted>@tickethistory.Changed</muted>
                                                     <br />
                                                     @*<a href="#">Paul Rudd</a> purchased an item.<br />*@
 
                                                     Assigned @newvalue to ticket
-                                                    
+
 
 
                                                 </p>
@@ -228,6 +236,7 @@
                                 }
 
                             </div>
+
                             <div class="row">
                                 <div class="row">
                                     <div class="col-md-8">
@@ -239,32 +248,26 @@
                                                 {
                                                     @Html.AntiForgeryToken()
                                                     @Html.Hidden("TicketId", Model.Id)
-                                                    <div class="form-panel">
-                                                        @*<form action="#" class="form-horizontal style-form">*@
+                                                    <div class="panel">
 
-                                                        <div class="form-group">
-
-                                                            <div class="controls col-md-9">
-                                                                <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                                    <span class="btn btn-theme btn-file">
-                                                                        <span class="fileupload-new"><i class="fa fa-paperclip"></i> select file</span>
-                                                                        <span class="fileupload-exists"><i class="fa fa-undo"></i> change</span>
-                                                                        <input type="file" name="file" class="default" />
-                                                                    </span>
-                                                                    <span class="fileupload-preview" style="margin-left:5px;"></span>
-                                                                    <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
-                                                                    <button type="submit" class="btn btn-success">submit</button>
-                                                                </div>
+                                                        <div class="controls col-md-9">
+                                                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                                <span class="btn btn-theme btn-file">
+                                                                    <span class="fileupload-new"><i class="fa fa-paperclip"></i> select file</span>
+                                                                    <span class="fileupload-exists"><i class="fa fa-undo"></i> change</span>
+                                                                    <input type="file" name="file" class="default" />
+                                                                </span>
+                                                                <span class="fileupload-preview" style="margin-left:5px;"></span>
+                                                                <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
+                                                                <button type="submit" class="btn btn-success">submit</button>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group">
-                                                            <input type="text" name="attachmentDescription" />
 
-                                                        </div>
+                                                        <input type="text" name="attachmentDescription" />
 
-                                                        @*</form>*@
                                                     </div>
                                                 }
+
 
                                                 <!-- /form-panel -->
                                             </div>
