@@ -22,7 +22,7 @@ namespace bugtracker.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
             context.TicketStatuses.AddOrUpdate(m => m.Name,
-                new TicketStatus() { Name = "Open" },
+                new TicketStatus() { Name = "Open"},
                 new TicketStatus() { Name = "Closed" },
                 new TicketStatus() { Name = "On-Hold" },
                 new TicketStatus() { Name = "Un-Assigned"}

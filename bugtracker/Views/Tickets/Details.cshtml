@@ -42,7 +42,6 @@
 
                         <div class="col-md-8">
                             <div class="row">
-                                <dl class="dl-horizontal">
                                     @*need to figure out what i want my users to see in the details section.*@
                                     @using (Html.BeginForm())
                                     {
@@ -74,7 +73,7 @@
 
 
                                     }
-                                </dl>
+                              
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -101,25 +100,26 @@
                                                     }
 
 
-                                                    <footer>
-                                                        @using (Html.BeginForm("Create", "TicketComments", FormMethod.Post))
-                                                        {
-                                                            @Html.AntiForgeryToken()
+                                                        <footer>
+                                                            @using (Html.BeginForm("Create", "TicketComments", FormMethod.Post))
+                                                            {
+                                                                @Html.AntiForgeryToken()
 
-                                                            @Html.Hidden("TicketId", Model.Id)
-                                                            @Html.Editor("CommentBody", new { @class = "form-control" })
-                                                            <button type="submit" class="btn btn-theme">Send</button>
-                                                            <div class="btn-group hidden-sm hidden-xs">
-                                                                <button type="button" class="btn btn-white"><i class="fa fa-meh-o"></i></button>
-                                                                <button type="button" class="btn btn-white"><i class=" fa fa-paperclip"></i></button>
-                                                            </div>
+                                                                @Html.Hidden("TicketId", Model.Id)
+                                                                @Html.Editor("CommentBody", new { @class="form-control"})
 
-                                                        }
-                                                        @*<div class="chat-txt">
-                                                                <input type="text" class="form-control">
-                                                            </div>*@
+                                                                <button type="submit" class="btn btn-theme">Send</button>
+                                                                <div class="btn-group hidden-sm hidden-xs">
+                                                                    <button type="button" class="btn btn-white"><i class="fa fa-meh-o"></i></button>
+                                                                    <button type="button" class="btn btn-white"><i class=" fa fa-paperclip"></i></button>
+                                                                </div>
 
-                                                    </footer>
+                                                            }
+                                                            @*<div class="chat-txt">
+            <input type="text" class="form-control">
+        </div>*@
+
+                                                        </footer>
                                                 </aside>
                                                 <aside class="right-side">
 
@@ -298,6 +298,17 @@
     <script src="~/Scripts/bootstrap-timepicker.js"></script>
     <script src="~/Scripts/moment.min.js"></script>
     <script src="~/Scripts/advanced-form-components.js"></script>
+    <script src="~/Scripts/tinymce/jquery.tinymce.min.js"></script>
+    <script src="~/Scripts/tinymce/tinymce.js"></script>
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            tinymce.init({
+                selector: '#editor'
+            });
+        });
+    </script>
+
 
 </body>
 
