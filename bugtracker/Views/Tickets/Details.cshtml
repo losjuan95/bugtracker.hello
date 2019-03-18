@@ -116,8 +116,8 @@
 
                                                             }
                                                             @*<div class="chat-txt">
-            <input type="text" class="form-control">
-        </div>*@
+                                                                    <input type="text" class="form-control">
+                                                                </div>*@
 
                                                         </footer>
                                                 </aside>
@@ -128,41 +128,25 @@
                                                     </div>
 
                                                     <ul class="chat-available-user">
+                                                        @foreach (var member in TicketHelper.MembersList(Model.Id))
+                                                        {
                                                         <li>
-                                                            <a href="chat_room.html">
-                                                                <img class="img-circle" src="img/friends/fr-02.jpg" width="32">
+                                                            @if (member.AvatarPath == null)
+                                                            {
+                                                                <img class="img-circle" src="~/img/defaultavatar.png" width="32">
+                                                             }
 
-                                                                <span class="text-muted">1h:02m</span>
-                                                            </a>
+                                                            else
+                                                            {
+                                                                <img class="img-circle" src="@Url.Content(member.AvatarPath)" width="32">
+                                                            }
+
+                                                            <span class="text-muted">@member.FirstName</span>
+
                                                         </li>
-                                                        <li>
-                                                            <a href="chat_room.html">
-                                                                <img class="img-circle" src="img/friends/fr-05.jpg" width="32">
-                                                                David Duncan
-                                                                <span class="text-muted">1h:08m</span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="chat_room.html">
-                                                                <img class="img-circle" src="img/friends/fr-07.jpg" width="32">
-                                                                Laura Smith
-                                                                <span class="text-muted">1h:10m</span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="chat_room.html">
-                                                                <img class="img-circle" src="img/friends/fr-08.jpg" width="32">
-                                                                Julia Schultz
-                                                                <span class="text-muted">3h:00m</span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="chat_room.html">
-                                                                <img class="img-circle" src="img/friends/fr-01.jpg" width="32">
-                                                                Frank Arias
-                                                                <span class="text-muted">4h:22m</span>
-                                                            </a>
-                                                        </li>
+                                                        }
+
+
                                                     </ul>
                                                 </aside>
                                             </div>
@@ -253,9 +237,9 @@
                                                         <div class="controls col-md-9">
                                                             <div class="fileupload fileupload-new" data-provides="fileupload">
                                                                 <span class="btn btn-theme btn-file">
-                                                                    <span class="fileupload-new"><i class="fa fa-paperclip"></i> select file</span>
-                                                                    <span class="fileupload-exists"><i class="fa fa-undo"></i> change</span>
-                                                                    <input type="file" name="file" class="default" />
+                                                                    @*<span class="fileupload-new"><i class="fa fa-paperclip"></i> select file</span>
+                            <span class="fileupload-exists"><i class="fa fa-undo"></i> change</span>*@
+                                                                    <input type="file" name="file" />
                                                                 </span>
                                                                 <span class="fileupload-preview" style="margin-left:5px;"></span>
                                                                 <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
@@ -268,7 +252,31 @@
                                                     </div>
                                                 }
 
-
+                                                <div class="form-group last">
+                                                    <label class="control-label col-md-3">Image Upload</label>
+                                                    <div class="col-md-9">
+                                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" alt="" />
+                                                            </div>
+                                                            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                                            <div>
+                                                                <span class="btn btn-theme02 btn-file">
+                                                                    <span class="fileupload-new"><i class="fa fa-paperclip"></i> Select image</span>
+                                                                    <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+                                                                    <input type="file" class="default" />
+                                                                </span>
+                                                                <a href="advanced_form_components.html#" class="btn btn-theme04 fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+                                                            </div>
+                                                        </div>
+                                                        <span class="label label-info">NOTE!</span>
+                                                        <span>
+                                                            Attached image thumbnail is
+                                                            supported in Latest Firefox, Chrome, Opera,
+                                                            Safari and Internet Explorer 10 only
+                                                        </span>
+                                                    </div>
+                                                </div>
                                                 <!-- /form-panel -->
                                             </div>
                                             <!-- /col-lg-12 -->

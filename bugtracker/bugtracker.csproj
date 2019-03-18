@@ -205,8 +205,13 @@
     <Compile Include="Helpers\NotificationHelper.cs" />
     <Compile Include="Helpers\ProjectHelpers.cs" />
     <Compile Include="Helpers\TicketHelper.cs" />
+    <Compile Include="Helpers\TicketStatusHelper.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Helpers\UserRolesHelpers.cs" />
+    <Compile Include="Migrations\201903180140093_Modifications.cs" />
+    <Compile Include="Migrations\201903180140093_Modifications.Designer.cs">
+      <DependentUpon>201903180140093_Modifications.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Email.cs" />
@@ -257,6 +262,7 @@
     <Content Include="img\avatarimg2.jpg" />
     <Content Include="img\avatarimg3.jpg" />
     <Content Include="img\avatarimg4.jpg" />
+    <Content Include="img\core icon 1.png" />
     <Content Include="img\core icon.jpg" />
     <Content Include="img\crate.jpeg" />
     <Content Include="img\defaultavatar.png" />
@@ -511,6 +517,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201903180140093_Modifications.resx">
+      <DependentUpon>201903180140093_Modifications.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

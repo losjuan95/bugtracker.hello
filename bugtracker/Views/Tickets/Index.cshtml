@@ -1,5 +1,5 @@
 ﻿@model bugtracker.Models.TicketsViewModel
-    
+@using bugtracker.Helpers
 
 
 <section id="main-content">
@@ -49,7 +49,7 @@
                                         <td class="hidden-phone">@ticket.Created</td>
                                         <td class="hidden-phone">@ticket.TicketType.Name</td>
                                         <td class="hidden-phone">@ticket.TicketPriority.Name</td>
-                                        <td><span class="label label-info label-mini">@ticket.TicketStatus.Name</span></td>
+                                        <td><span class="label @TicketStatusHelper.GetStatusClass(ticket.TicketStatus.Name) label-mini">@ticket.TicketStatus.Name</span></td>
                                        
                                         
                                         <td>

@@ -512,7 +512,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     /* Safari and Chrome */
     .dropdown-menu.extended  {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.176) !important;
-    };
+    }
     }
 
 .dropdown-menu.extended li p {
@@ -2209,7 +2209,7 @@ ul.my-friends li .friends-pic {
 .pricing {list-style:none; padding:10px 0 20px;}
 .pricing li {
 	border-bottom: 1px solid #DCDBD7;
-	font-size: 13px;
+	font-size:  13px;
 	font-weight: 100;
 	line-height: 34px;
 	margin: 0 auto;
@@ -2223,6 +2223,31 @@ ul.my-friends li .friends-pic {
 	transition: background-color .4s linear, color .4s linear; }
 
 .pricing li:last-child {border-bottom:0px solid #fff;}
+
+pricing2 {
+    list-style: none;
+    padding: 10px 0 20px;
+}
+
+.pricing2 li {
+    border-bottom: 1px solid #DCDBD7;
+    font-size: 18px;
+    font-weight: 100;
+    line-height: 34px;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    width: 70%;
+    -webkit-transition: background-color .4s linear, color .4s linear;
+    -moz-transition: background-color .4s linear, color .4s linear;
+    -o-transition: background-color .4s linear, color .4s linear;
+    -ms-transition: background-color .4s linear, color .4s linear;
+    transition: background-color .4s linear, color .4s linear;
+}
+
+    .pricing2 li:last-child {
+        border-bottom: 0px solid #fff;
+    }
 
 
 /* FAQ CONF */
@@ -3165,7 +3190,7 @@ ul.chat-available-user li a:hover {
     /* Safari and Chrome */
     .panel-footer.revenue-foot {
         margin-bottom: -4px;
-    };
+    }
     }
 
 

@@ -8,7 +8,7 @@ namespace bugtracker.Helpers
 {
     public class TicketHelper
     {
-        ApplicationDbContext db = new ApplicationDbContext();
+       static  ApplicationDbContext db = new ApplicationDbContext();
 
         public bool IsUserAssignedToTicket(string userId, int ticketId)
         {
@@ -17,6 +17,10 @@ namespace bugtracker.Helpers
             return (ship);
         }
         
+        public static List<ApplicationUser> MembersList(int id)
+        {
+            return db.Tickets.Find(id).Project.Users.ToList();
+        }
 
     }
 }

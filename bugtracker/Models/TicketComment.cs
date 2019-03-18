@@ -11,7 +11,11 @@ namespace bugtracker.Models
     {
         public int Id { get; set; }
         public int TicketId { get; set; }
+
+    
         public string CommentTitle { get; set; }
+
+        [MaxLength(200), MinLength(1)]
         [AllowHtml]
         public string CommentBody { get; set; }
 

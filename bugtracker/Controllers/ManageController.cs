@@ -9,6 +9,7 @@ using Microsoft.Owin.Security;
 using bugtracker.Models;
 using bugtracker.Helpers;
 using System.IO;
+using System.ComponentModel.DataAnnotations;
 
 namespace bugtracker.Controllers
 {
@@ -92,6 +93,7 @@ namespace bugtracker.Controllers
             user.LastName = lastName;
 
             db.Users.Attach(user);
+    
             db.Entry(user).Property(u => u.FirstName).IsModified = true;
             db.Entry(user).Property(u => u.FirstName).IsModified = true;
 

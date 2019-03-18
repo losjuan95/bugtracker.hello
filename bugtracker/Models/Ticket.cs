@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -10,8 +11,12 @@ namespace bugtracker.Models
         public int Id { get; set; }
         public int ProjectId { get; set; }
 
+        [MaxLength(30), MinLength(1)]
         public string Title { get; set; }
+
+        [MaxLength(60), MinLength(1)]
         public string Description { get; set; }
+
         public DateTime Created { get; set; }
         public DateTime? Updated { get; set; }
        
