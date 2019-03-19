@@ -138,7 +138,7 @@ namespace bugtracker.Controllers
             TicketNotification ticketNotification = db.TicketNotifications.Find(id);
             db.TicketNotifications.Remove(ticketNotification);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("MyIndex");
         }
 
         protected override void Dispose(bool disposing)

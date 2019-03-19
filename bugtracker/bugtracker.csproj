@@ -433,6 +433,10 @@
     <Content Include="Uploads\joshbosh.jpg" />
     <Content Include="Uploads\Landon-Wyatt-_2018.jpg" />
     <Content Include="Uploads\sanders.jpg" />
+    <Content Include="Uploads\silhoutte2.jpg" />
+    <Content Include="Uploads\silhoutte3.jpg" />
+    <Content Include="Uploads\silhoutte4.jpg" />
+    <Content Include="Uploads\silhoutte5.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

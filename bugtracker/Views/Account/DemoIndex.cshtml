@@ -35,154 +35,332 @@
       Author: TemplateMag.com
       License: https://templatemag.com/license/
     ======================================================= -->
+    <style>
+        body{
+            font-size: 30px;
+        }
+    </style>
 </head>
 
 <body>
     <section>
-        <section>
-            <div class="row">
 
-                <div class="col-md-12">
-
-                    <div class="custom-box">
-                        <div class="servicetitle">
-                            <h4>Roles</h4>
-                            <hr>
+        <div class="row">
+            <div class="container-fluid">
+                <div class="col-lg-12">
+                    <div class="col-md-3">
+                        <div class="custom-box">
+                            <div class="servicetitle">
+                                <h4>Developer</h4>
+                                <hr>
+                            </div>
+                            <div class="icn-main-container">
+                                <img class="img-circle" src="~/img/silhoutte3.jpg" width="155" />
+                            </div>
+                            <p></p>
+                            <ul class="pricing"></ul>
+                            <div class="pricing footer">
+                                @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("Role", "DemoDevs@mailinator.com")
+                                    <button type="submit" class="btn btn-primary btn-block" role="button">Login</button>
+                                }
+                            </div>
                         </div>
-                        <div class="icn-main-container">
-
-                        </div>
-                        <p></p>
-                        <ul class="pricing2">
-                            <li>Each User in this Application has a different role that plays a different funtion</li>
-                            <li>The <strong>Developer</strong> is a role that will be assigned a ticket to a project within the application that he/she may be working on</li>
-                            <li>The <strong>Submitter</strong> is a role where the user will be assigned to a project and be able to submit a ticket</li>
-                            <li>The <strong>Project Manager</strong> is a role where the user will be able to assign a project to a developer and also has the abiltiy to make new projects</li>
-                            <li>The <strong>Admin</strong> is a role where the user will be able to view all tickets and projects that will be given out within the application. Also has the ability to edit and delete information regarding these projects and tickets</li>
-
-                        </ul>
-                        <div class="pricing footer">
-                            <a href="@Url.Action("FirstPage", "Account")">
-
-                                <span class="btn btn-primary">Go Back?</span>
-                            </a>
-                            
-
-                        </div>
+                        <!-- end custombox -->
                     </div>
-                    <!-- end custombox -->
+                    <div class="col-md-3">
+                        <div class="custom-box">
+                            <div class="servicetitle">
+                                <h4>Submitter</h4>
+                                <hr>
+                            </div>
+                            <div class="icn-main-container">
+                                <img class="img-circle" src="~/img/silhoutte2.jpg" width="100" />
+                            </div>
+                            <p></p>
+                            <ul class="pricing"></ul>
+                            <div class="pricing footer">
+                                @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("Role", "DemoSub@mailinator.com")
+
+                                    <button type="submit" class="btn btn-primary btn-block " role="button">Login</button>
+
+
+                                }
+                            </div>
+                        </div>
+
+                        <!-- end custombox -->
+                    </div>
+                    <!-- end col-4 -->
+                    <div class="col-md-3">
+                        <div class="custom-box">
+                            <div class="servicetitle">
+                                <h4>Project Manager</h4>
+                                <hr>
+                            </div>
+                            <div class="icn-main-container">
+                                <img class="img-circle" src="~/img/silhoutte4.jpg" width="100" />
+                            </div>
+                            <p></p>
+                            <ul class="pricing"></ul>
+                            <div class="pricing footer">
+                                @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("Role", "DemoPM@mailinator.com")
+                                    <button type="submit" class="btn btn-primary btn-block" role="button">Login</button>
+                                }
+                            </div>
+                        </div>
+                        <!-- end custombox -->
+                    </div>
+                    <!-- end col-4 -->
+                    <div class="col-md-3">
+                        <div class="custom-box">
+                            <div class="servicetitle">
+                                <h4>Admin</h4>
+                                <hr>
+                            </div>
+                            <div class="icn-main-container">
+                                <img class="img-circle" src="~/img/silhoutte5.jpg" width="100" />
+                            </div>
+                            <p></p>
+                            <ul class="pricing"></ul>
+                            <div class="pricing footer">
+                                @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("Role", "DemoAdmin@mailinator.com")
+                                    <button type="submit" class="btn btn-primary btn-block" role="button">Login</button>
+                                }
+                            </div>
+                        </div>
+                        <!-- end custombox -->
+                    </div>
+
+
+
+
                 </div>
             </div>
-            <div class="row">
-                <div class="container-fluid">
-                    <div class="col-lg-12">
-                        <div class="col-md-3">
-                            <div class="custom-box">
-                                <div class="servicetitle">
-                                    <h4>Developer</h4>
-                                    <hr>
-                                </div>
-                                <div class="icn-main-container">
-                                    <img class="img-circle" src="~/img/silhoutte3.jpg" width="155" />
-                                </div>
-                                <p></p>
-                                <ul class="pricing"></ul>
-                                <div class="pricing footer">
-                                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
-                                    {
-                                        @Html.AntiForgeryToken()
-                                        @Html.Hidden("Role", "DemoDevs@mailinator.com")
-                                        <button type="submit" class="btn btn-primary btn-block" role="button">Login</button>
-                                    }
-                                </div>
-                            </div>
-                            <!-- end custombox -->
-                        </div>
-                        <div class="col-md-3">
-                            <div class="custom-box">
-                                <div class="servicetitle">
-                                    <h4>Submitter</h4>
-                                    <hr>
-                                </div>
-                                <div class="icn-main-container">
-                                    <img class="img-circle" src="~/img/silhoutte2.jpg" width="100" />
-                                </div>
-                                <p></p>
-                                <ul class="pricing"></ul>
-                                <div class="pricing footer">
-                                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
-                                    {
-                                        @Html.AntiForgeryToken()
-                                        @Html.Hidden("Role", "DemoSub@mailinator.com")
-                                  
-                                        <button type="submit" class="btn btn-primary btn-block " role="button">Login</button>
 
-                                       
-                                    }
-                                </div>
-                            </div>
-
-                            <!-- end custombox -->
-                        </div>
-                        <!-- end col-4 -->
-                        <div class="col-md-3">
-                            <div class="custom-box">
-                                <div class="servicetitle">
-                                    <h4>Project Manager</h4>
-                                    <hr>
-                                </div>
-                                <div class="icn-main-container">
-                                    <img class="img-circle" src="~/img/silhoutte4.jpg" width="100" />
-                                </div>
-                                <p></p>
-                                <ul class="pricing"></ul>
-                                <div class="pricing footer">
-                                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
-                                    {
-                                        @Html.AntiForgeryToken()
-                                        @Html.Hidden("Role", "DemoPM@mailinator.com")
-                                        <button type="submit" class="btn btn-primary btn-block" role="button">Login</button>
-                                    }
-                                </div>
-                            </div>
-                            <!-- end custombox -->
-                        </div>
-                        <!-- end col-4 -->
-                        <div class="col-md-3">
-                            <div class="custom-box">
-                                <div class="servicetitle">
-                                    <h4>Admin</h4>
-                                    <hr>
-                                </div>
-                                <div class="icn-main-container">
-                                    <img class="img-circle" src="~/img/silhoutte5.jpg" width="100" />
-                                </div>
-                                <p></p>
-                                <ul class="pricing"></ul>
-                                <div class="pricing footer">
-                                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
-                                    {
-                                        @Html.AntiForgeryToken()
-                                        @Html.Hidden("Role", "DemoAdmin@mailinator.com")
-                                        <button type="submit" class="btn btn-primary btn-block" role="button">Login</button>
-                                    }
-                                </div>
-                            </div>
-                            <!-- end custombox -->
-                        </div>
-
-
-
-
-                    </div>
-                </div>
-
-                <!--  /col-lg-12 -->
-            </div>
-            <!--  /row -->
-        </section>
+            <!--  /col-lg-12 -->
+        </div>
+        <!--  /row -->
         <!-- /wrapper -->
     </section>
+    <section>
+
+        <!-- /row -->
+        <div class="row content-panel">
+            <h2 class="centered">ROLES</h2>
+            <div class="col-md-10 col-md-offset-1 mt mb">
+                <div class="accordion" id="accordion2">
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="faq.html#collapseOne">
+                                <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>Developer
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="accordion-body collapse in">
+                            <div class="accordion-inner">
+                                <p>
+                                    Can view the projects and ticket details they are assigned to.
+                                </p>
+                                <p>
+                                    Can Edit/Delete their tickets details.
+                                </p>
+                                <p>
+                                    Cannot Edit the ticket status.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="faq.html#collapseTwo">
+                                <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>Submitter
+                            </a>
+                        </div>
+                        <div id="collapseTwo" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                <p>
+                                    Is the <strong>ONLY</strong> one that can create tickets.
+                                </p>
+                                <p>
+                                    Can Edit and Delete <strong>ONLY</strong> the tickets they have created.
+                                </p>
+                                <p>
+                                    Can see only their own ticket details and projects they are assigned to.
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="faq.html#collapseThree">
+                                <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>Project Manager
+                            </a>
+                        </div>
+                        <div id="collapseThree" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                <p>
+                                    Assigns Developers and Submitters to projects.
+                                </p>
+                                <p>
+                                    Can Edit/Delete Projects they have created/Assigned to.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="faq.html#collapseFour">
+                                <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>Admin
+                            </a>
+                        </div>
+                        <div id="collapseFour" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                <p>
+                                    Is the only one that can Assign Users to Roles.
+                                </p>
+                                <p>
+                                    Can Edit/Delete/View/Create <strong>ALL</strong> projects and tickets.
+                                </p>
+                                <p>
+                                    Can Assign Projects to Project Managers and Developers. Can Assign Tickets To Developers.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="faq.html#collapseFive">
+                                <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>New User
+                            </a>
+                        </div>
+                        <div id="collapseFive" class="accordion-body collapse">
+                            <div class="accordion-inner">
+
+                                <p>
+                                    If you register as a new user you will be able to see your profile. You will be registered within the application but will not be assigned a role until the admin assigns you.
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end accordion -->
+            </div>
+
+        </div>
+        <section>
+            <div class="pricing footer row content-panel centered">
+                <a href="@Url.Action("FirstPage", "Account")">
+
+                    <span class="btn btn-primary">Go Back?</span>
+                </a>
+
+            </div>
+        </section>
+        
+       
+    </section>
+       
+    
+
+    
+
+
+
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="~/Scripts/jquery.dcjqaccordion.2.7.js"></script>
+
+    <script src="~/Scripts/jquery.scrollTo.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.nicescroll.js"></script>
+    <!--common script for all pages-->
+    <script src="~/Scripts/common-scripts.js"></script>
+
+
+    @*old role explanation*@
+
+    @*<div class="row">
+
+            <div class="col-md-12">
+
+                <div class="custom-box">
+                    <div class="servicetitle">
+                        <h4>Roles</h4>
+                        <hr>
+                    </div>
+
+                    <ul class="pricing2">
+                        <li>Each User in this Application has a different role that plays a different funtion</li>
+                        <li style="text-align: justify; text-justify: inter-word;">The <strong>Developer</strong> is a role that will be assigned a ticket to a project within the application that he/she may be working on</listyle="text-align:>
+                        <li style="text-align: justify; text-justify: inter-word;">The <strong>Submitter</strong> is a role where the user will be assigned to a project and be able to submit a ticket</li>
+                        <li style="text-align: justify; text-justify: inter-word;">The <strong>Project Manager</strong> is a role where the user will be able to assign a project to a developer and also has the abiltiy to make new projects</li>
+                        <li style="text-align: justify; text-justify: inter-word;">The <strong>Admin</strong> is a role where the user will be able to view all tickets and projects that will be given out within the application. Also has the ability to edit and delete information regarding these projects and tickets</listyle="text-align:>
+
+                    </ul>
+                    <div class="pricing footer">
+                        <a href="@Url.Action("FirstPage", "Account")">
+
+                            <span class="btn btn-primary">Go Back?</span>
+                        </a>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+    @*<div class="row mt mb">
+        <div class="col-lg-12">
+            <br>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="dmbox">
+                    <div class="service-icon">
+                        <a class="" href="faq.html#"><i class="dm-icon fa fa-question fa-3x"></i></a>
+                    </div>
+                    <h4>1. Knowledge-Base</h4>
+                    <p>
+                        A bug tracking system or defect tracking system is a software application that keeps track of reported software bugs in software development projects. It may be regarded as a type of issue tracking system.
+
+                        Many bug tracking systems, such as those used by most open-source software projects, allow end-users to enter bug reports directly.'
+                    </p>
+                </div>
+            </div>
+            <!-- end dmbox -->
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="dmbox">
+                    <div class="service-icon">
+                        <a class="" href="faq.html#"><i class="dm-icon fa fa-envelope-o fa-3x"></i></a>
+                    </div>
+                    <h4>2. Report a Bug</h4>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"s standard dummy text ever since the 1500s..</p>
+                </div>
+            </div>
+            <!-- end dmbox -->
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="dmbox">
+                    <div class="service-icon">
+                        <a class="" href="faq.html#"><i class="dm-icon fa fa-random fa-3x"></i></a>
+                    </div>
+                    <h4>3. Submit a Ticket</h4>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"s standard dummy text ever since the 1500s..</p>
+                </div>
+            </div>
+            <!-- end dmbox -->
+        </div>
+        <!--  /col-lg-12 -->
+    </div>*@
 </body>
 
 </html>

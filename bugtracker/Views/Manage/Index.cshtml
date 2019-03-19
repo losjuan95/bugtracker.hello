@@ -19,15 +19,24 @@
             <div class="col-lg-12">
                 <div class="row content-panel">
                     <div class="col-md-4 profile-text mt mb centered">
-                        <p><img src="@user.AvatarPath" class="avatar img img-circle"></p>
+                        <p>
+                            @if (user.AvatarPath == null)
+                            {
+                                <img class="avatar img img-circle" src="~/img/defaultavatar.png" >
+                            }
+                            <img src="@user.AvatarPath" class="avatar img img-circle">
+                        </p>
                         <h3>@user.FirstName</h3>
                         <h6>
                             <i class="fa fa-briefcase"></i><span>Role:</span>
                             @if(User.IsInRole("Admin")||User.IsInRole("PM")|| User.IsInRole("Sub")|| User.IsInRole("Devs"))
                             {
-                                rolehelper.ListUserRoles(currentuserId).FirstOrDefault().ToString();
 
+                                //rolehelper.ListUserRoles(currentuserId).FirstOrDefault().ToString();
+                                var myRole = rolehelper.ListUserRoles(currentuserId).FirstOrDefault();
+                                @myRole
                             }
+                             
                         </h6>
                             <br>
                         </div>
@@ -90,30 +99,37 @@
                                     </div>
                                     <!-- /col-md-6 -->
                                     <div class="col-md-6 detailed">
-                                        <h4>Ticket Statuses</h4>
-                                        <div class="row centered mt mb">
-                                            <div class="col-sm-4">
-                                                <h1><i class="fa fa-money"></i></h1>
-                                                <h3>On-Hold</h3>
-                                                <h2>
-                                                    @db.Tickets.Where(t => t.TicketStatus.Name == "On-Hold").Count()
-                                                   
-                                                </h2>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <h1><i class="fa fa-trophy"></i></h1>
-                                                <h3>Open</h3>
-                                                <h2>@db.Tickets.Where(t => t.TicketStatus.Name == "Open").Count()</h2>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <h1><i class="fa fa-window-close"></i></h1>
-                                                <h3>Closed</h3>
-                                                <h2>@db.Tickets.Where(t => t.TicketStatus.Name == "Closed").Count()</h2>
-                                            </div>
-                                        </div>
+                                        @if (User.IsInRole("Admin") || User.IsInRole("PM") || User.IsInRole("Sub") || User.IsInRole("Devs"))
+                                        {
+                                            <h4>Ticket Statuses</h4>
+                                            <div class="row centered mt mb">
 
-                                       
-                                    </div>
+                                                <div class="col-sm-4">
+                                                    <h1><i class="fa fa-money"></i></h1>
+                                                    <h3>On-Hold</h3>
+                                                    <h2>
+                                                        @db.Tickets.Where(t => t.TicketStatus.Name == "On-Hold").Count()
+
+                                                    </h2>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <h1><i class="fa fa-trophy"></i></h1>
+                                                    <h3>Open</h3>
+                                                    <h2>@db.Tickets.Where(t => t.TicketStatus.Name == "Open").Count()</h2>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <h1><i class="fa fa-window-close"></i></h1>
+                                                    <h3>Closed</h3>
+                                                    <h2>@db.Tickets.Where(t => t.TicketStatus.Name == "Closed").Count()</h2>
+                                                </div>
+
+                                                
+
+
+                                            </div>
+                                        }
+
+                                     </div>
                                     <!-- /col-md-6 -->
                                 </div>
                                 <!-- /OVERVIEW -->

@@ -107,9 +107,9 @@
                 <p>
                     @if (User.IsInRole("Sub") && projhelper.IsUserOnProject(HttpContext.Current.User.Identity.GetUserId(), Model.Id))
                     {
-                        @Html.ActionLink("Create New Ticket", "Create", "Tickets", new { Id = Model.Id }, null)
+                        @Html.ActionLink("Create New Ticket", "Create", "Tickets", new { Id = Model.Id }, null) 
                     }
-
+                    |
                     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
                     @Html.ActionLink("Back to List", "Index")
                 </p>

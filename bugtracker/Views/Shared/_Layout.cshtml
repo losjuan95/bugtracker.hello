@@ -102,7 +102,13 @@
             <div id="sidebar" class="nav-collapse ">
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
-                    <p class="centered"><img src="@user.AvatarPath" class="img-circle" width="80"></p>
+                    <p class="centered">
+                        @if (user.AvatarPath == null)
+                        {
+                            <img class="img-circle" src="~/img/defaultavatar.png" width="80">
+                        }
+                        <img src="@user.AvatarPath" class="img-circle" width="80">
+                    </p>
                     <h5 class="centered">@user.FirstName</h5>
                     <li>
 
