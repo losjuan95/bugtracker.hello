@@ -94,32 +94,32 @@
                                     <tbody>
                                         @foreach (var ticket in Model.SubTickets.OrderBy(t => t.Created))
                                         {
-                                            <tr>
-                                                <td>
-                                                    <a>@ticket.Title</a>
-                                                </td>
-                                                <td class="hidden-phone">
-                                                    @if (ticket.AssignedToUserId != null)
-                                                    {
-                                                        @ticket.AssignedToUser.FirstName
-                                                    }
-                                                    else
-                                                    {
-                                                        <span>Unassigned</span>
-                                                    }
-                                                </td>
-                                                <td class="hidden-phone">@ticket.Description</td>
-                                                <td class="hidden-phone">@ticket.Project.Name</td>
-                                                <td class="hidden-phone">@ticket.Created</td>
-                                                <td class="hidden-phone">@ticket.TicketType.Name</td>
-                                                <td class="hidden-phone">@ticket.TicketPriority.Name</td>
-                                                <td><span class="label label-info label-mini">@ticket.TicketStatus.Name</span></td>
-                                                <td>
-                                                    <a href="@Url.Action("Edit", new { id = ticket.Id})" class="btn btn-success btn-xs"><i class="fa fa-check"></i></a>
-                                                    <a href="@Url.Action("Details", new { id = ticket.Id})" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                                                    <a href="@Url.Action("Delete", new { id = ticket.Id})" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td>
+                                                <a>@ticket.Title</a>
+                                            </td>
+                                            <td class="hidden-phone">
+                                                @if (ticket.AssignedToUserId != null)
+                                                {
+                                                    @ticket.AssignedToUser.FirstName
+                                                }
+                                                else
+                                                {
+                                                    <span>Unassigned</span>
+                                                }
+                                            </td>
+                                            <td class="hidden-phone">@ticket.Description</td>
+                                            <td class="hidden-phone">@ticket.Project.Name</td>
+                                            <td class="hidden-phone">@ticket.Created</td>
+                                            <td class="hidden-phone">@ticket.TicketType.Name</td>
+                                            <td class="hidden-phone">@ticket.TicketPriority.Name</td>
+                                            <td><span class="label @TicketStatusHelper.GetStatusClass(ticket.TicketStatus.Name) label-mini">@ticket.TicketStatus.Name</span></td>
+                                            <td>
+                                                <a href="@Url.Action("Edit", new { id = ticket.Id})" class="btn btn-success btn-xs"><i class="fa fa-check"></i></a>
+                                                <a href="@Url.Action("Details", new { id = ticket.Id})" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                                <a href="@Url.Action("Delete", new { id = ticket.Id})" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
+                                            </td>
+                                        </tr>
                                         }
 
 
@@ -149,34 +149,34 @@
                                     <tbody>
                                         @foreach (var ticket in Model.DevTickets.OrderBy(t => t.Created))
                                         {
-                                            <tr>
-                                                <td>
-                                                    <a>@ticket.Title</a>
-                                                </td>
-                                                
-                                                <td class="hidden-phone">
-                                                    @if (ticket.AssignedToUserId != null)
-                                                    {
-                                                        @ticket.AssignedToUser.FirstName
-                                                    }
-                                                    else
-                                                    {
-                                                        <span>Unassigned</span>
-                                                    }
-                                                </td>
+                                        <tr>
+                                            <td>
+                                                <a>@ticket.Title</a>
+                                            </td>
 
-                                                <td class="hidden-phone">@ticket.Description</td>
-                                                <td class="hidden-phone">@ticket.Project.Name</td>
-                                                <td class="hidden-phone">@ticket.Created</td>
-                                                <td class="hidden-phone">@ticket.TicketType.Name</td>
-                                                <td class="hidden-phone">@ticket.TicketPriority.Name</td>
-                                                <td><span class="label label-info label-mini">@ticket.TicketStatus.Name</span></td>
-                                                <td>
-                                                    <a href="@Url.Action("Edit", new { id = ticket.Id})" class="btn btn-success btn-xs"><i class="fa fa-check"></i></a>
-                                                    <a href="@Url.Action("Details", new { id = ticket.Id})" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                                                    <a href="@Url.Action("Delete", new { id = ticket.Id})" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
-                                                </td>
-                                            </tr>
+                                            <td class="hidden-phone">
+                                                @if (ticket.AssignedToUserId != null)
+                                                {
+                                                    @ticket.AssignedToUser.FirstName
+                                                }
+                                                else
+                                                {
+                                                    <span>Unassigned</span>
+                                                }
+                                            </td>
+
+                                            <td class="hidden-phone">@ticket.Description</td>
+                                            <td class="hidden-phone">@ticket.Project.Name</td>
+                                            <td class="hidden-phone">@ticket.Created</td>
+                                            <td class="hidden-phone">@ticket.TicketType.Name</td>
+                                            <td class="hidden-phone">@ticket.TicketPriority.Name</td>
+                                            <td><span class="label @TicketStatusHelper.GetStatusClass(ticket.TicketStatus.Name) label-mini">@ticket.TicketStatus.Name</span></td>
+                                            <td>
+                                                <a href="@Url.Action("Edit", new { id = ticket.Id})" class="btn btn-success btn-xs"><i class="fa fa-check"></i></a>
+                                                <a href="@Url.Action("Details", new { id = ticket.Id})" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                                <a href="@Url.Action("Delete", new { id = ticket.Id})" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
+                                            </td>
+                                        </tr>
                                         }
 
                                     </tbody>
@@ -204,32 +204,32 @@
                                     <tbody>
                                         @foreach (var ticket in Model.ProjTickets.OrderBy(t => t.Created))
                                         {
-                                            <tr>
-                                                <td>
-                                                    <a>@ticket.Title</a>
-                                                </td>
-                                                @if (ticket.AssignedToUserId != null)
-                                                {
-                                                    <td class="hidden-phone">@ticket.AssignedToUser.FirstName</td>
+                                        <tr>
+                                            <td>
+                                                <a>@ticket.Title</a>
+                                            </td>
+                                            @if (ticket.AssignedToUserId != null)
+                                            {
+                                                <td class="hidden-phone">@ticket.AssignedToUser.FirstName</td>
 
-                                                }
-                                                else
-                                                {
-                                                    <td>Unassigned</td>
-                                                }
+                                            }
+                                            else
+                                            {
+                                                <td>Unassigned</td>
+                                            }
 
-                                                <td class="hidden-phone">@ticket.Description</td>
-                                                <td class="hidden-phone">@ticket.Project.Name</td>
-                                                <td class="hidden-phone">@ticket.Created</td>
-                                                <td class="hidden-phone">@ticket.TicketType.Name</td>
-                                                <td class="hidden-phone">@ticket.TicketPriority.Name</td>
-                                                <td><span class="label label-info label-mini">@ticket.TicketStatus.Name</span></td>
-                                                <td>
-                                                    <a href="@Url.Action("Edit", new { id = ticket.Id})" class="btn btn-success btn-xs"><i class="fa fa-check"></i></a>
-                                                    <a href="@Url.Action("Details", new { id = ticket.Id})" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                                                    <a href="@Url.Action("Delete", new { id = ticket.Id})" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
-                                                </td>
-                                            </tr>
+                                            <td class="hidden-phone">@ticket.Description</td>
+                                            <td class="hidden-phone">@ticket.Project.Name</td>
+                                            <td class="hidden-phone">@ticket.Created</td>
+                                            <td class="hidden-phone">@ticket.TicketType.Name</td>
+                                            <td class="hidden-phone">@ticket.TicketPriority.Name</td>
+                                            <td><span class="label @TicketStatusHelper.GetStatusClass(ticket.TicketStatus.Name) label-mini">@ticket.TicketStatus.Name</span></td>
+                                            <td>
+                                                <a href="@Url.Action("Edit", new { id = ticket.Id})" class="btn btn-success btn-xs"><i class="fa fa-check"></i></a>
+                                                <a href="@Url.Action("Details", new { id = ticket.Id})" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                                <a href="@Url.Action("Delete", new { id = ticket.Id})" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
+                                            </td>
+                                        </tr>
                                         }
 
 

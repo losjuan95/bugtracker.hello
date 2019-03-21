@@ -32,17 +32,20 @@
 <body>
     <section id="main-content">
         <section class="wrapper site-min-height">
-            <h3><i class="fa fa-angle-right"></i> Details</h3>
+            <h3><i class="fa fa-angle-right"></i> Ticket</h3>
             <div class="row mt">
                 <div class="col-lg-12">
 
                     <div>
-                        <h4>Ticket</h4>
+                        <h4>Details</h4>
+                        <p>
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                            @Html.ActionLink("Back to List", "Index")
+                        </p>
                         <hr />
 
                         <div class="col-md-8">
                             <div class="row">
-                                @*need to figure out what i want my users to see in the details section.*@
                                 @using (Html.BeginForm())
                                 {
                                     <div class="form-horizontal">
@@ -87,36 +90,65 @@
                                                         <h3>Comments</h3>
 
                                                     </div>
-                                                    @foreach (var comment in Model.TicketComments.OrderByDescending(c => c.Created))
-                                                    {
-                                                        <div class="group-rom">
-                                                            <div class="first-part odd">@comment.User.FirstName</div>
-                                                            <div class="second-part">
-                                                                @Html.Raw(comment.CommentBody)
-
-                                                            </div>
-                                                            <div class="third-part">@comment.Created.ToString("hh:mm")</div>
-                                                        </div>
-                                                    }
-
-
-                                                        <footer>
-                                                            @using (Html.BeginForm("Create", "TicketComments", FormMethod.Post))
+                                                    <div class="scrollbox">
+                                                       
+                                                            @foreach (var comment in Model.TicketComments.OrderByDescending(c => c.Created))
                                                             {
-                                                                @Html.AntiForgeryToken()
+                                                                <ul>
+                                                                    <li>
+                                                                        <div class="group-rom ">
+                                                                            <div class="first-part odd">@comment.User.FirstName</div>
+                                                                            <div class="second-part">
+                                                                                @Html.Raw(comment.CommentBody)
 
-                                                                @Html.Hidden("TicketId", Model.Id)
-                                                                @Html.Editor("CommentBody", new { @class = "form-control chat-text" })
+                                                                            </div>
+                                                                            <div class="third-part">@comment.Created.ToString("hh:mm")</div>
+                                                                        </div>
 
-                                                                <button type="submit" class="btn btn-theme">Send</button>
-
+                                                                    </li>
+                                                                </ul>
+                                                               
 
                                                             }
-                                                            @*
-                                                                    <div class="chat-txt">
-                                                                        <input type="text" class="form-control">
-                                                                    </div>*@
-                                                                    </footer>
+
+                                                        
+                                                    </div>
+                                                   
+
+                                                    @using (Html.BeginForm("Create", "TicketComments", FormMethod.Post))
+                                                    {
+                                                        @Html.AntiForgeryToken()
+
+                                                        @Html.Hidden("TicketId", Model.Id)
+                                                        @Html.Editor("CommentBody", new { @class = "form-control" })
+                                                        <br />
+                                                        <div class="row">
+                                                            <div class="fileupload fileupload-new pull-right col-md-3" data-provides="fileupload">
+                                                                <span class="btn btn-theme btn-file">
+                                                                    <span class="fileupload-new"><i class="fa fa-paperclip"></i> select file</span>
+                                                                    <span class="fileupload-exists"><i class="fa fa-undo"></i> change</span>
+                                                                    <br />
+                                                                    <input type="file" name="file" />
+                                                                </span>
+                                                                <span class="fileupload-preview" style="margin-left:5px;"></span>
+                                                                <br />
+                                                                <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
+                                                                <br />
+                                                                <br />
+                                                                @*<button type="submit" class="btn btn-success">submit</button>*@
+                                                            </div>
+                                                            <div class="col-md-2 pull-right">
+                                                                <button type="submit" class="btn btn-theme">Send</button>
+
+                                                            </div>
+
+
+
+                                                        </div>
+                                                              
+
+                                                    }
+
                                                 </aside>
                                                 <aside class="right-side">
 
@@ -139,7 +171,7 @@
                                                                 }
 
                                                                 <span class="text-muted">@member.FirstName</span>
-
+                                                                
                                                             </li>
                                                         }
 
@@ -155,14 +187,14 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-md-4">
                             <div class="row">
-
+                                <h3>Ticket History</h3>
                                 @foreach (var tickethistory in Model.TicketHistories.OrderByDescending(m => m.Changed))
                                 {
                                     <!-- First Activity -->
-                                    <div class="desc">
+                                    <div class="desc showback">
+
                                         <div class="thumb">
                                             <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
                                         </div>
@@ -217,8 +249,9 @@
                                 }
 
                             </div>
-
-                            <div class="row">
+                            
+                            
+                           <div class="row">
                                 <div class="row">
                                     <div class="col-md-8">
                                         <!-- row -->
@@ -229,49 +262,27 @@
                                                 {
                                                     @Html.AntiForgeryToken()
                                                     @Html.Hidden("TicketId", Model.Id)
-                                                    <div class="panel">
-                                                        <br />
-                                                        <div class="controls col-md-9">
-                                                            <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                                <span class="btn btn-theme btn-file">
-                                                                    <span class="fileupload-new"><i class="fa fa-paperclip"></i> select file</span>
-                                                                    <span class="fileupload-exists"><i class="fa fa-undo"></i> change</span>
-                                                                    <br />
-                                                                    <input type="file" name="file" />
-                                                                </span>
-                                                                <span class="fileupload-preview" style="margin-left:5px;"></span>
-                                                                <br />
-                                                                <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
-                                                                <br />
-                                                                <br />
-                                                                <button type="submit" class="btn btn-success">submit</button>
-                                                            </div>
-                                                        </div>
+                                                    
+                                                    <div class="form-group last ">
+                                                        <div class="col-md-9 showback">
+                                                            <div class="fileupload fileupload-new " data-provides="fileupload">
+                                                                <div class="fileupload-new thumbnail " style="width: 200px; height: 150px;">
+                                                                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" alt="" />
 
-                                                        <input type="text" name="attachmentDescription" />
-                                                        <br />
-                                                    </div>
-                                                    @*<div class="form-group last">
-                                                            <label class="control-label col-md-3">Image Upload</label>
-                                                            <div class="col-md-9">
-                                                                <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                                    <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                                                        <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" alt="" />
-
-                                                                    </div>
-                                                                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                                                                    <div>
-                                                                        <span class="btn btn-theme02 btn-file">
-                                                                            <span class="fileupload-new"><i class="fa fa-paperclip"></i> Select image</span>
-                                                                            <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
-                                                                            <input type="file" class="default" />
-                                                                        </span>
-                                                                        <a href="advanced_form_components.html#" class="btn btn-theme04 fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
-                                                                    </div>
                                                                 </div>
-                                                                <button type="submit" class="btn btn-success">submit</button>
+                                                                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                                                <div>
+                                                                    <span class="btn btn-theme02 btn-file">
+                                                                        <span class="fileupload-new"><i class="fa fa-paperclip"></i> Select image</span>
+                                                                        <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+                                                                        <input type="file" class="default" />
+                                                                    </span>
+                                                                    <a href="advanced_form_components.html#" class="btn btn-theme04 fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+                                                                </div>
                                                             </div>
-                                                        </div>*@
+                                                            <button type="submit" class="btn btn-success">submit</button>
+                                                        </div>
+                                                    </div>
 
                                                 }
 
@@ -287,10 +298,7 @@
                         </div>
 
                     </div>
-                    <p>
-                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-                        @Html.ActionLink("Back to List", "Index")
-                    </p>
+                  
 
                 </div>
             </div>
@@ -311,13 +319,13 @@
         <script src="~/Scripts/moment.min.js"></script>
         <script src="~/Scripts/advanced-form-components.js"></script>
 
-        @*<script type="text/javascript">
+        <script type="text/javascript">
             $(function () {
                 tinymce.init({
                     selector: '#CommentBody'
                 });
             });
-        </script>*@
+        </script>
        
     }
 
