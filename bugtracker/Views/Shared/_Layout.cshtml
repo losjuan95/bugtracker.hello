@@ -33,7 +33,6 @@
     <link href="~/Content/style.css" rel="stylesheet" />
     <link href="~/Content/style-responsive.css" rel="stylesheet" />
     <link href="~/custom Css/profile.css" rel="stylesheet" />
-    <script src="~/Content/Chart.js"></script>
     @*cdn for datatables*@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css" />
 
@@ -59,7 +58,7 @@
             <div class="sidebar-toggle-box">
                 <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
             </div>
-            
+
             @Html.ActionLink("bugtracker", "index", "Manage", null, new { @class = "logo" })
 
             <!--logo end-->
@@ -118,16 +117,16 @@
                         </a>
                     </li>
                     @*@if (User.Identity.IsAuthenticated)
-        {
+                        {
 
-            <li class="sub-menu">
-                <a href="@Url.Action("Index","Home")">
-                    <i class="fa fa-dashboard"></i>
-                    <span>Dashboard</span>
-                </a>
+                            <li class="sub-menu">
+                                <a href="@Url.Action("Index","Home")">
+                                    <i class="fa fa-dashboard"></i>
+                                    <span>Dashboard</span>
+                                </a>
 
-            </li>
-        }*@
+                            </li>
+                        }*@
                     @if (User.IsInRole("Admin") || User.IsInRole("PM") || User.IsInRole("Sub") || User.IsInRole("Devs"))
                     {
 
@@ -170,12 +169,12 @@
 
 
                     @*<li>
-            <a href="inbox.html">
-                <i class="fa fa-envelope"></i>
-                <span>Mail </span>
-                <span class="label label-theme pull-right mail-info">2</span>
-            </a>
-        </li>*@
+                            <a href="inbox.html">
+                                <i class="fa fa-envelope"></i>
+                                <span>Mail </span>
+                                <span class="label label-theme pull-right mail-info">2</span>
+                            </a>
+                        </li>*@
 
                 </ul>
                 <!-- sidebar menu end-->
@@ -217,11 +216,14 @@
     <!--script for this page-->
     <script src="~/Scripts/sparkline-chart.js"></script>
     <script src="~/Scripts/zabuto_calendar.js"></script>
+    <script src="~/Scripts/bootstrap-fileupload.js"></script>
+    <script src="~/Scripts/Chart.js"></script>
+    <script src="~/Scripts/chartjs-conf.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
     @*<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>*@
-            @RenderSection("scripts", false)
-            @*<script type="text/javascript">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>*@
+    @RenderSection("scripts", false)
+    @*<script type="text/javascript">
             $(document).ready(function() {
               var unique_id = $.gritter.add({
                 // (string | mandatory) the heading of the notification

@@ -161,7 +161,7 @@ namespace bugtracker.Controllers
         [HttpPost]
 
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description")] Project project, string ProjectManager, List<String> Submitters, List<String> Developers)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description")] Project project, string ProjectManager, List<string> Submitters, List<string> Developers)
         {
             var projectUsers = projecthelper.UsersOnProject(project.Id);
             if (ModelState.IsValid) 
@@ -180,9 +180,26 @@ namespace bugtracker.Controllers
                     foreach (var user in Developers)
                     {
                         projecthelper.AddUserToProject(user, project.Id);
+
                     }
-                  
+
+
                 }
+                if(Developers == null)
+                {
+                    foreach(var user in Developers)
+                    {
+                        projecthelper.RemoveUserFromProject(user, project.Id);
+                    }
+                }
+                //if (!string.IsNullOrEmpty(projectUsers.ToString()))
+                //{
+                //    projecthelper.RemoveUserFromProject(Developers.ToString(), project.Id);
+
+                //}
+                //projecthelper.AddUserToProject(Developers.ToString(), project.Id);
+
+
                 if (Submitters != null)
                 {
                     foreach (var user in Submitters)
@@ -190,8 +207,16 @@ namespace bugtracker.Controllers
                         projecthelper.AddUserToProject(user, project.Id);
                     }
 
+
                 }
-                
+                if (Submitters == null)
+                {
+                    foreach (var user in Submitters)
+                    {
+                        projecthelper.RemoveUserFromProject(user, project.Id);
+                    }
+                }
+
                 db.Entry(project).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

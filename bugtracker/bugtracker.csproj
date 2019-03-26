@@ -292,6 +292,8 @@
     <Content Include="Scripts\bootstrap-timepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\chartjs-conf.js" />
     <Content Include="Scripts\common-scripts.js" />
     <Content Include="Scripts\date.js" />
     <Content Include="Scripts\daterangepicker.js" />
@@ -304,6 +306,9 @@
     <Content Include="Scripts\jquery.scrollTo.min.js" />
     <Content Include="Scripts\jquery.sparkline.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\morris-conf.js" />
+    <Content Include="Scripts\morris.min.js" />
+    <Content Include="Scripts\raphael.min.js" />
     <Content Include="Scripts\sparkline-chart.js" />
     <Content Include="Scripts\tinymce\jquery.tinymce.min.js" />
     <Content Include="Scripts\tinymce\license.txt" />
