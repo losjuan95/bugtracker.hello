@@ -4,10 +4,6 @@
 
 @model Ticket
 
-
-
-
-
 @{
     ViewBag.Title = "Details";
     var projhelper = new ProjectHelpers();
@@ -43,14 +39,21 @@
                             @Html.ActionLink("Back to List", "Index")
                         </p>
                         <hr />
-
+                        <div class="desc showback col-md-4 col-md-offset-2 centered" style="align-content:center;">
+                           <label class="bold">
+                               <h4><strong>Description:</strong> </h4> 
+                           </label>
+                            @Html.DisplayTextFor(m => m.Description)
+                        </div>
                         <div class="col-md-8">
                             <div class="row">
                                 @using (Html.BeginForm())
                                 {
+
                                     <div class="form-horizontal">
                                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                         @Html.HiddenFor(m => m.Id)
+
                                         <button class="bounce">
                                             @Html.Label("Ticket Priority:")
                                             @Html.DisplayTextFor(m => m.TicketPriority.Name)
@@ -75,9 +78,11 @@
                                     </div>
 
 
+
                                 }
 
                             </div>
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <!--main content start-->
@@ -91,29 +96,29 @@
 
                                                     </div>
                                                     <div class="scrollbox">
-                                                       
-                                                            @foreach (var comment in Model.TicketComments.OrderByDescending(c => c.Created))
-                                                            {
-                                                                <ul>
-                                                                    <li>
-                                                                        <div class="group-rom ">
-                                                                            <div class="first-part odd">@comment.User.FirstName</div>
-                                                                            <div class="second-part">
-                                                                                @Html.Raw(comment.CommentBody)
 
-                                                                            </div>
-                                                                            <div class="third-part">@comment.Created.ToString("hh:mm")</div>
+                                                        @foreach (var comment in Model.TicketComments.OrderByDescending(c => c.Created))
+                                                        {
+                                                            <ul>
+                                                                <li>
+                                                                    <div class="group-rom ">
+                                                                        <div class="first-part odd">@comment.User.FirstName</div>
+                                                                        <div class="second-part">
+                                                                            @Html.Raw(comment.CommentBody)
+
                                                                         </div>
+                                                                        <div class="third-part">@comment.Created.ToString("hh:mm")</div>
+                                                                    </div>
 
-                                                                    </li>
-                                                                </ul>
-                                                               
+                                                                </li>
+                                                            </ul>
 
-                                                            }
 
-                                                        
+                                                        }
+
+
                                                     </div>
-                                                   
+
 
                                                     @using (Html.BeginForm("Create", "TicketComments", FormMethod.Post))
                                                     {
@@ -145,7 +150,7 @@
 
 
                                                         </div>
-                                                              
+
 
                                                     }
 
@@ -171,7 +176,7 @@
                                                                 }
 
                                                                 <span class="text-muted">@member.FirstName</span>
-                                                                
+
                                                             </li>
                                                         }
 
@@ -249,9 +254,9 @@
                                 }
 
                             </div>
-                            
-                            
-                           <div class="row">
+
+
+                            <div class="row">
                                 <div class="row">
                                     <div class="col-md-8">
                                         <!-- row -->
@@ -262,7 +267,7 @@
                                                 {
                                                     @Html.AntiForgeryToken()
                                                     @Html.Hidden("TicketId", Model.Id)
-                                                    
+
                                                     <div class="form-group last ">
                                                         <div class="col-md-9 showback">
                                                             <div class="fileupload fileupload-new " data-provides="fileupload">

@@ -65,16 +65,74 @@
                         </div>
 
                     </div>
-                    <!-- /col-md-4 -->
-                   
-                        <div class="content-panel">
-                            <h4><i class="fa fa-angle-right"></i> Doughnut</h4>
-                            <div class="panel-body text-center">
-                                <canvas id="doughnut" height="300" width="400"></canvas>
-                            </div>
-                        </div>
-                    <!-- /col-md-4 -->
+                    <!-- /col-md-4 --> 
+                    
+                    <div class="col-md-4 profile-text centered">
 
+                        
+                        <div class="border-head">
+                            <h3>My Tickets by status</h3>                       
+                        </div>
+                        <div class="custom-bar-chart">
+                            <ul class="y-axis">
+                                <li><span>5</span></li>
+                                <li><span>4</span></li>
+                                <li><span>3</span></li>
+                                <li><span>2</span></li>
+                                <li><span>1</span></li>
+                                <li><span>0</span></li>
+                            </ul>
+                           
+                                <div class="bar">
+                                    <div class="title">Open</div>
+                                    <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByStatus("Open")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByStatus("Open")</div>
+                                </div>
+                                <div class="bar ">
+                                    <div class="title">Closed</div>
+                                    <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByStatus("Closed")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByStatus("Closed")</div>
+                                </div>
+                                <div class="bar ">
+                                    <div class="title">On-Hold</div>
+                                    <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByStatus("On-Hold")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByStatus("On-Hold")</div>
+                                </div>
+                                <div class="bar ">
+                                    <div class="title">Unassigned</div>
+                                    <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByStatus("Un-Assigned")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByStatus("Un-Assigned")</div>
+                                </div>
+                           
+                        </div>
+
+                    </div>
+                    <!-- /col-md-4 -->
+                    <div class="col-md-4 profile-text centered">
+                        <div class="border-head">
+                            <h3>My Tickets by priority</h3>
+                        </div>
+                        <div class="custom-bar-chart">
+                            <ul class="y-axis">
+                                <li><span>5</span></li>
+                                <li><span>4</span></li>
+                                <li><span>3</span></li>
+                                <li><span>2</span></li>
+                                <li><span>1</span></li>
+                                <li><span>0</span></li>
+                            </ul>
+                            <div class="bar">
+                                <div class="title">High</div>
+                                <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByPriority("High")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByPriority("High")</div>
+                            </div>
+                            <div class="bar ">
+                                <div class="title">Medium</div>
+                                <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByPriority("Medium")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByPriority("Medium")</div>
+                            </div>
+                            <div class="bar ">
+                                <div class="title">Low</div>
+                                <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByPriority("Low")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByPriority("Low")</div>
+                            </div>
+                           
+                        </div>
+
+                    </div>
                 </div>
                 <!-- /col-md-4 -->
             </div>
@@ -111,39 +169,89 @@
                                     </div>
                                     <!-- /detailed -->
                                 </div>
-                                <!-- /col-md-6 -->
                                 <div class="col-md-6 detailed">
-                                    @if (User.IsInRole("Admin") || User.IsInRole("PM") || User.IsInRole("Sub") || User.IsInRole("Devs"))
+                                    <h4 class="mb">Personal Information</h4>
+
+
+                                    @using (Html.BeginForm("ChangeName", "Manage", FormMethod.Post))
                                     {
-                                        <h4>Ticket Statuses</h4>
-                                        <div class="row centered mt mb">
+                                        @Html.AntiForgeryToken()
 
-                                            <div class="col-sm-4">
-                                                <h1><i class="fa fa-money"></i></h1>
-                                                <h3>On-Hold</h3>
-                                                <h2>
-                                                    @db.Tickets.Where(t => t.TicketStatus.Name == "On-Hold").Count()
-
-                                                </h2>
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.Id)
+                                        <div class="form-group">
+                                            @Html.Label("firstName", "First Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @Html.Editor("firstName", new { htmlAttributes = new { @class = "form-control" } })
                                             </div>
-                                            <div class="col-sm-4">
-                                                <h1><i class="fa fa-trophy"></i></h1>
-                                                <h3>Open</h3>
-                                                <h2>@db.Tickets.Where(t => t.TicketStatus.Name == "Open").Count()</h2>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <h1><i class="fa fa-window-close"></i></h1>
-                                                <h3>Closed</h3>
-                                                <h2>@db.Tickets.Where(t => t.TicketStatus.Name == "Closed").Count()</h2>
-                                            </div>
-
-
-
-
                                         </div>
-                                    }
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <div class="form-group">
+                                            @Html.Label("lastName", "Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @Html.Editor("lastName", new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <br />
+                                        <div class="row">
 
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="Save" class="btn btn-primary" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    }
+                                    <br />
+                                    <div class="right-divider hidden-sm hidden-xs">
+                                        <dl class="dl-horizontal">
+                                            <dt>Password:</dt>
+                                            [
+                                            @Html.ActionLink("Change Password", "ChangePassword", "Manage")
+                                            ]
+                                        </dl>
+
+                                    </div>
                                 </div>
+                                <!-- /col-md-6 -->
+                                @*<div class="col-md-6 detailed">
+            @if (User.IsInRole("Admin") || User.IsInRole("PM") || User.IsInRole("Sub") || User.IsInRole("Devs"))
+            {
+                <h4>Ticket Statuses</h4>
+                <div class="row centered mt mb">
+
+                    <div class="col-sm-4">
+                        <h1><i class="fa fa-money"></i></h1>
+                        <h3>On-Hold</h3>
+                        <h2>
+                            @db.Tickets.Where(t => t.TicketStatus.Name == "On-Hold").Count()
+
+                        </h2>
+                    </div>
+                    <div class="col-sm-4">
+                        <h1><i class="fa fa-trophy"></i></h1>
+                        <h3>Open</h3>
+                        <h2>@db.Tickets.Where(t => t.TicketStatus.Name == "Open").Count()</h2>
+                    </div>
+                    <div class="col-sm-4">
+                        <h1><i class="fa fa-window-close"></i></h1>
+                        <h3>Closed</h3>
+                        <h2>@db.Tickets.Where(t => t.TicketStatus.Name == "Closed").Count()</h2>
+                    </div>
+
+
+
+
+                </div>
+            }
+
+        </div>*@
                                 <!-- /col-md-6 -->
 
                             </div>
@@ -155,56 +263,7 @@
                    
                     <div id="edit" class="tab-pane">
                         <div class="row">
-                            <div class="col-lg-8 col-lg-offset-2 detailed">
-                                <h4 class="mb">Personal Information</h4>
-
-
-                                @using (Html.BeginForm("ChangeName", "Manage", FormMethod.Post))
-                                {
-                                    @Html.AntiForgeryToken()
-
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                    @Html.HiddenFor(model => model.Id)
-                                    <div class="form-group">
-                                        @Html.Label("firstName", "First Name", htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            @Html.Editor("firstName", new { htmlAttributes = new { @class = "form-control" } })
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <div class="form-group">
-                                        @Html.Label("lastName", "Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            @Html.Editor("lastName", new { htmlAttributes = new { @class = "form-control" } })
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <div class="row">
-
-                                        <div class="form-group">
-                                            <div class="col-md-offset-2 col-md-10">
-                                                <input type="submit" value="Save" class="btn btn-primary" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                }
-                                <br />
-                                <div class="right-divider hidden-sm hidden-xs">
-                                    <dl class="dl-horizontal">
-                                        <dt>Password:</dt>
-                                        [
-                                        @Html.ActionLink("Change Password", "ChangePassword", "Manage")
-                                        ]
-                                    </dl>
-
-                                </div>
-                            </div>
+                           
                         </div>
                         <!-- /col-lg-8 -->
                     </div>

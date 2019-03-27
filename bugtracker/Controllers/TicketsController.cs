@@ -175,7 +175,8 @@ namespace bugtracker.Controllers
 
                 //getting a reference to the old ticket somehow
                 var oldTicket = db.Tickets.AsNoTracking().FirstOrDefault(t => t.Id == ticket.Id);
-
+                
+                ticket.Updated = DateTime.Now;
                 db.Entry(ticket).State = EntityState.Modified;
                 db.SaveChanges();
 
@@ -185,7 +186,7 @@ namespace bugtracker.Controllers
                 historyHelper.AddHistory(oldTicket, ticket);
 
                 
-                return RedirectToAction("Index", "Ticket");
+                return RedirectToAction("Index", "Tickets");
             }
             ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FirstName", ticket.AssignedToUserId);
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName", ticket.OwnerUserId);
