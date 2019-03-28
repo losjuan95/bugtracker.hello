@@ -10,6 +10,8 @@ using bugtracker.Models;
 using bugtracker.Helpers;
 using System.IO;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace bugtracker.Controllers
 {
@@ -71,16 +73,31 @@ namespace bugtracker.Controllers
 
             var userId = User.Identity.GetUserId();
             var user = db.Users.Find(userId);
-            //var model = new IndexViewModel
 
-            //{
-            //    HasPassword = HasPassword(),
-            //    PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-            //    TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-            //    Logins = await UserManager.GetLoginsAsync(userId),
-            //    BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-            //};
+            List<DataPoint> dataPoints = new List<DataPoint>();
+
+            dataPoints.Add(new DataPoint("Open", TicketHelper.GetTicketCountByStatus("Open")));
+            dataPoints.Add(new DataPoint("Closed", TicketHelper.GetTicketCountByStatus("Closed")));
+            dataPoints.Add(new DataPoint("Un-Assigned", TicketHelper.GetTicketCountByStatus("Un-Assigned")));
+            dataPoints.Add(new DataPoint("On-Hold", TicketHelper.GetTicketCountByStatus("On-Hold")));
+
+
+            ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+
+            List<DataPoint> dataPoints2 = new List<DataPoint>();
+
+            dataPoints2.Add(new DataPoint("High", TicketHelper.GetTicketCountByPriority("High")));
+            dataPoints2.Add(new DataPoint("Medium", TicketHelper.GetTicketCountByPriority("Medium")));
+            dataPoints2.Add(new DataPoint("Low", TicketHelper.GetTicketCountByPriority("Low")));
+            
+
+
+            ViewBag.DataPoints2 = JsonConvert.SerializeObject(dataPoints2);
+
+           
             return View(user);
+
+
         }
         //post
         [HttpPost]

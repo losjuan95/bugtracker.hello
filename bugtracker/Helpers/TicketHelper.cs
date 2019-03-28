@@ -51,7 +51,7 @@ namespace bugtracker.Helpers
                 case "Sub":
                     ticketCnt = db.Tickets.Where(t => t.OwnerUserId == myUserId && t.TicketStatus.Name == status).Count();
                     break;
-                case "Dev":
+                case "Devs":
                     ticketCnt = db.Tickets.Where(t => t.AssignedToUserId == myUserId && t.TicketStatus.Name == status).Count();
                     break;
                 default:
@@ -84,7 +84,7 @@ namespace bugtracker.Helpers
                 case "Sub":
                     ticketCnt = db.Tickets.Where(t => t.OwnerUserId == myUserId).Count();
                     break;
-                case "Dev":
+                case "Devs":
                     ticketCnt = db.Tickets.Where(t => t.AssignedToUserId == myUserId).Count();
                     break;
                 default:

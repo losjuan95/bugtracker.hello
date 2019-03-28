@@ -19,7 +19,7 @@
         <div class="row mt">
             <div class="col-lg-12">
                 <div class="row content-panel">
-                    <div class="col-md-4 profile-text mt mb centered">
+                    <div class="col-md-3 profile-text mt mb centered">
                         <p>
                             @if (user.AvatarPath == null)
                             {
@@ -65,77 +65,87 @@
                         </div>
 
                     </div>
-                    <!-- /col-md-4 --> 
-                    
-                    <div class="col-md-4 profile-text centered">
+                    <!-- /col-md-4 -->
+                    @*<div class="col-md-4 profile-text centered">
 
-                        
-                        <div class="border-head">
-                            <h3>My Tickets by status</h3>                       
+
+            <div class="border-head">
+                <h3>My Tickets by status</h3>
+            </div>
+            <div class="custom-bar-chart">
+                <ul class="y-axis">
+                    <li><span>5</span></li>
+                    <li><span>4</span></li>
+                    <li><span>3</span></li>
+                    <li><span>2</span></li>
+                    <li><span>1</span></li>
+                    <li><span>0</span></li>
+                </ul>
+
+                    <div class="bar">
+                        <div class="title">Open</div>
+                        <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByStatus("Open")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByStatus("Open")</div>
+                    </div>
+                    <div class="bar ">
+                        <div class="title">Closed</div>
+                        <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByStatus("Closed")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByStatus("Closed")</div>
+                    </div>
+                    <div class="bar ">
+                        <div class="title">On-Hold</div>
+                        <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByStatus("On-Hold")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByStatus("On-Hold")</div>
+                    </div>
+                    <div class="bar ">
+                        <div class="title">Unassigned</div>
+                        <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByStatus("Un-Assigned")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByStatus("Un-Assigned")</div>
+                    </div>
+
+            </div>
+
+        </div>*@
+                    <!-- /col-md-4 -->
+                    @*<div class="col-md-4 profile-text centered">
+            <div class="border-head">
+                <h3>My Tickets by priority</h3>
+            </div>
+            <div class="custom-bar-chart">
+                <ul class="y-axis">
+                    <li><span>5</span></li>
+                    <li><span>4</span></li>
+                    <li><span>3</span></li>
+                    <li><span>2</span></li>
+                    <li><span>1</span></li>
+                    <li><span>0</span></li>
+                </ul>
+                <div class="bar">
+                    <div class="title">High</div>
+                    <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByPriority("High")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByPriority("High")</div>
+                </div>
+                <div class="bar ">
+                    <div class="title">Medium</div>
+                    <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByPriority("Medium")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByPriority("Medium")</div>
+                </div>
+                <div class="bar ">
+                    <div class="title">Low</div>
+                    <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByPriority("Low")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByPriority("Low")</div>
+                </div>
+
+            </div>
+
+        </div>*@
+                    <div class="col-md-4 profile-text centered">
+                        <div id="bchart" style="height: 370px; width: 100%;">
+
                         </div>
-                        <div class="custom-bar-chart">
-                            <ul class="y-axis">
-                                <li><span>5</span></li>
-                                <li><span>4</span></li>
-                                <li><span>3</span></li>
-                                <li><span>2</span></li>
-                                <li><span>1</span></li>
-                                <li><span>0</span></li>
-                            </ul>
-                           
-                                <div class="bar">
-                                    <div class="title">Open</div>
-                                    <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByStatus("Open")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByStatus("Open")</div>
-                                </div>
-                                <div class="bar ">
-                                    <div class="title">Closed</div>
-                                    <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByStatus("Closed")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByStatus("Closed")</div>
-                                </div>
-                                <div class="bar ">
-                                    <div class="title">On-Hold</div>
-                                    <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByStatus("On-Hold")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByStatus("On-Hold")</div>
-                                </div>
-                                <div class="bar ">
-                                    <div class="title">Unassigned</div>
-                                    <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByStatus("Un-Assigned")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByStatus("Un-Assigned")</div>
-                                </div>
-                           
+
+                    </div>
+                    <div class=" col-md-4 profile-text centered">
+                        <div id="chart2" style="height: 370px; width: 100%;">
+
                         </div>
 
                     </div>
                     <!-- /col-md-4 -->
-                    <div class="col-md-4 profile-text centered">
-                        <div class="border-head">
-                            <h3>My Tickets by priority</h3>
-                        </div>
-                        <div class="custom-bar-chart">
-                            <ul class="y-axis">
-                                <li><span>5</span></li>
-                                <li><span>4</span></li>
-                                <li><span>3</span></li>
-                                <li><span>2</span></li>
-                                <li><span>1</span></li>
-                                <li><span>0</span></li>
-                            </ul>
-                            <div class="bar">
-                                <div class="title">High</div>
-                                <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByPriority("High")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByPriority("High")</div>
-                            </div>
-                            <div class="bar ">
-                                <div class="title">Medium</div>
-                                <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByPriority("Medium")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByPriority("Medium")</div>
-                            </div>
-                            <div class="bar ">
-                                <div class="title">Low</div>
-                                <div class="value tooltips" data-original-title="@TicketHelper.GetTicketCountByPriority("Low")" data-toggle="tooltip" data-placement="top">@TicketHelper.GetTicketPlacementByPriority("Low")</div>
-                            </div>
-                           
-                        </div>
-
-                    </div>
                 </div>
-                <!-- /col-md-4 -->
-            </div>
             <!-- /row -->
         </div>
         <!-- /col-lg-12 -->
@@ -279,3 +289,45 @@
     </section>
 
 </section>
+@section scripts{
+    <script>
+        var chart = new CanvasJS.Chart("bchart", {
+	        theme: "light2",
+	        exportEnabled: true,
+	        animationEnabled: true,
+	        title: {
+		    text: "My Tickets by status",
+		    fontSize: 21
+	        },
+	        data: [{
+		        type: "pie",
+                startAngle: 60,
+                indexLabelFontSize: 12,
+		        toolTipContent: "<b>{label}</b>: {y}",
+		        indexLabel: "{label} - {y}",
+		        dataPoints: @Html.Raw(ViewBag.DataPoints)
+	        }]
+        });
+        chart.render();
+    </script>
+    <script>
+        var chart = new CanvasJS.Chart("chart2", {
+                    theme: "light2",
+                    exportEnabled: true,
+	                animationEnabled: true,
+	                title: {
+                        text: "My Tickets By Priority",
+                        fontSize: 21
+	                },
+	        data: [{
+		        type: "doughnut",
+		        startAngle: 60,
+		        indexLabelFontSize: 12,
+		        indexLabel: "{label} - {y}",
+		        toolTipContent: "<b>{label}:</b> {y}",
+		        dataPoints: @Html.Raw(ViewBag.DataPoints2)
+	        }]
+        });
+    chart.render();
+    </script>
+    }
