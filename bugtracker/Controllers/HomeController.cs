@@ -65,6 +65,8 @@ namespace bugtracker.Controllers
 
         }
 
+       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Contact(Email model)

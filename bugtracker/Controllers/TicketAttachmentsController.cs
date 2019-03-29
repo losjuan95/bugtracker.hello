@@ -65,7 +65,7 @@ namespace bugtracker.Controllers
                 db.SaveChanges();
 
             }
-
+          
             return RedirectToAction("Details", "Tickets", new { id = ticketAttachment.TicketId});
         }
 
